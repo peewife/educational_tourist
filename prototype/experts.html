@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研学专家</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .font-serif { font-family: 'Times New Roman', serif; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased min-h-screen pb-20">
+
+    <!-- Header -->
+    <div class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-transparent">
+        <div class="h-10 w-full"></div>
+        <div class="flex items-center justify-between h-12 px-4 pb-1">
+            <div class="flex items-center flex-1">
+                <button class="p-2 -ml-3 mr-1 text-gray-900">
+                    <i data-lucide="chevron-left" class="w-[26px] h-[26px]"></i>
+                </button>
+                <h1 class="text-[20px] font-serif font-bold text-gray-900 truncate tracking-wide">研学专家</h1>
+            </div>
+            <!-- Capsule -->
+            <div class="flex items-center space-x-3 px-3 py-1.5 rounded-full border border-gray-200 bg-white/50 backdrop-blur-md">
+                <i data-lucide="more-horizontal" class="text-gray-900 w-[18px] h-[18px]"></i>
+                <div class="w-[1px] h-4 bg-gray-300"></div>
+                <div class="relative flex items-center justify-center w-5 h-5 rounded-full border-2 border-gray-900">
+                    <div class="w-1.5 h-1.5 bg-gray-900 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search -->
+    <div class="px-4 py-2 border-b border-gray-100">
+        <div class="bg-gray-50 h-10 flex items-center px-4 rounded-lg">
+            <i data-lucide="search" class="w-[18px] h-[18px] text-gray-400 mr-2"></i>
+            <input type="text" placeholder="搜索专家姓名或ID" class="bg-transparent w-full text-sm outline-none font-light">
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex justify-around py-4 border-b border-gray-100">
+        <span class="text-[13px] tracking-wide cursor-pointer text-[#C8102E] font-bold border-b border-[#C8102E] pb-1">研学导师</span>
+        <span class="text-[13px] tracking-wide cursor-pointer text-gray-400 hover:text-black">研学教官</span>
+        <span class="text-[13px] tracking-wide cursor-pointer text-gray-400 hover:text-black">研究员</span>
+        <span class="text-[13px] tracking-wide cursor-pointer text-gray-400 hover:text-black">非遗传承</span>
+    </div>
+
+    <!-- List -->
+    <div class="divide-y divide-gray-50">
+        <!-- Expert 1 -->
+        <div class="p-4 flex space-x-4 items-center hover:bg-gray-50 transition-colors">
+            <div class="w-16 h-16 rounded-full overflow-hidden border border-gray-200 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" class="w-full h-full object-cover grayscale" alt="谢稳矩">
+            </div>
+            <div class="flex-1">
+                <h3 class="text-[18px] font-serif font-bold text-gray-900">谢稳矩</h3>
+                <p class="text-gray-500 text-[12px] uppercase tracking-wider mt-0.5">研学实践教学指导师</p>
+            </div>
+            <div class="text-right">
+                <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded-sm">高级</span>
+            </div>
+        </div>
+        <!-- Expert 2 -->
+        <div class="p-4 flex space-x-4 items-center hover:bg-gray-50 transition-colors">
+            <div class="w-16 h-16 rounded-full overflow-hidden border border-gray-200 flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" class="w-full h-full object-cover grayscale" alt="张慧敏">
+            </div>
+            <div class="flex-1">
+                <h3 class="text-[18px] font-serif font-bold text-gray-900">张慧敏</h3>
+                <p class="text-gray-500 text-[12px] uppercase tracking-wider mt-0.5">研学实践教学指导师</p>
+            </div>
+            <div class="text-right">
+                <span class="text-[10px] bg-gray-100 text-gray-600 px-2 py-1 rounded-sm">中级</span>
+            </div>
+        </div>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

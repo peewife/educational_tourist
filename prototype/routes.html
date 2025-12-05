@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精品线路</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .font-serif { font-family: 'Times New Roman', serif; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased min-h-screen pb-20">
+
+    <!-- Header -->
+    <div class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-transparent transition-colors duration-300">
+        <div class="h-10 w-full"></div>
+        <div class="flex items-center justify-between h-12 px-4 pb-1">
+            <h1 class="text-[20px] font-serif font-bold text-gray-900 truncate tracking-wide">精品线路</h1>
+            <div class="flex items-center space-x-3 px-3 py-1.5 rounded-full border border-gray-200 bg-white/50 backdrop-blur-md ml-auto">
+                <i data-lucide="more-horizontal" class="text-gray-900 w-[18px] h-[18px]"></i>
+                <div class="w-[1px] h-4 bg-gray-300"></div>
+                <div class="relative flex items-center justify-center w-5 h-5 rounded-full border-2 border-gray-900">
+                    <div class="w-1.5 h-1.5 bg-gray-900 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="px-4 py-4 border-b border-gray-100 sticky top-22 bg-white z-40">
+        <div class="flex justify-between items-center">
+            <span class="text-[12px] uppercase tracking-wider cursor-pointer text-gray-400 hover:text-gray-600">自然生态</span>
+            <span class="text-[12px] uppercase tracking-wider cursor-pointer font-bold text-black border-b border-black">红色研学</span>
+            <span class="text-[12px] uppercase tracking-wider cursor-pointer text-gray-400 hover:text-gray-600">文化遗产</span>
+            <span class="text-[12px] uppercase tracking-wider cursor-pointer text-gray-400 hover:text-gray-600">劳动实践</span>
+            <span class="text-[12px] uppercase tracking-wider cursor-pointer text-gray-400 hover:text-gray-600">地质科普</span>
+        </div>
+    </div>
+
+    <!-- Route List -->
+    <div class="px-4 py-6 space-y-6">
+        
+        <!-- Route 1 -->
+        <div class="flex space-x-4 items-start group">
+            <!-- Number & Line -->
+            <div class="flex flex-col items-center mt-1">
+                <span class="text-[10px] font-bold text-gray-300">01</span>
+                <div class="w-[1px] h-24 bg-gray-100 mt-1 group-last:hidden"></div>
+            </div>
+            <!-- Content -->
+            <div class="flex-1 pb-6 border-b border-gray-50">
+                <div class="flex justify-between items-start">
+                    <div class="pr-4">
+                        <span class="text-[10px] text-[#C8102E] font-bold uppercase tracking-widest mb-1 block">自然生态</span>
+                        <h3 class="text-[17px] font-serif font-bold text-gray-900 leading-snug">红色星火凝心铸魂，赤色地貌躬行实践</h3>
+                    </div>
+                    <div class="w-20 h-20 flex-shrink-0 bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=800&q=80" class="w-full h-full object-cover grayscale-[20%]" alt="">
+                    </div>
+                </div>
+                <div class="flex gap-2 mt-3">
+                    <span class="text-[10px] text-gray-500 border border-gray-200 px-2 py-0.5 rounded-full">小学</span>
+                    <span class="text-[10px] text-gray-500 border border-gray-200 px-2 py-0.5 rounded-full">初中</span>
+                    <span class="text-[10px] text-gray-500 border border-gray-200 px-2 py-0.5 rounded-full">两天</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Route 2 -->
+        <div class="flex space-x-4 items-start group">
+            <div class="flex flex-col items-center mt-1">
+                <span class="text-[10px] font-bold text-gray-300">02</span>
+                <div class="w-[1px] h-24 bg-gray-100 mt-1 group-last:hidden"></div>
+            </div>
+            <div class="flex-1 pb-6 border-b border-gray-50">
+                <div class="flex justify-between items-start">
+                    <div class="pr-4">
+                        <span class="text-[10px] text-[#C8102E] font-bold uppercase tracking-widest mb-1 block">红色研学</span>
+                        <h3 class="text-[17px] font-serif font-bold text-gray-900 leading-snug">循迹而行跟党走，红脉乡韵铸青春</h3>
+                    </div>
+                    <div class="w-20 h-20 flex-shrink-0 bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1596423736733-4f24c084e723?w=800&q=80" class="w-full h-full object-cover grayscale-[20%]" alt="">
+                    </div>
+                </div>
+                <div class="flex gap-2 mt-3">
+                    <span class="text-[10px] text-gray-500 border border-gray-200 px-2 py-0.5 rounded-full">初中</span>
+                    <span class="text-[10px] text-gray-500 border border-gray-200 px-2 py-0.5 rounded-full">一天</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Route 3 (Placeholder data to make list look fuller) -->
+        <div class="flex space-x-4 items-start group">
+            <div class="flex flex-col items-center mt-1">
+                <span class="text-[10px] font-bold text-gray-300">03</span>
+                <!-- No line for last item if logic applied, but CSS group-last:hidden handles it -->
+            </div>
+            <div class="flex-1 pb-6 border-b border-gray-50 border-none">
+                <div class="flex justify-between items-start">
+                    <div class="pr-4">
+                        <span class="text-[10px] text-[#C8102E] font-bold uppercase tracking-widest mb-1 block">文化遗产</span>
+                        <h3 class="text-[17px] font-serif font-bold text-gray-900 leading-snug">探秘客家土楼，传承非遗文化</h3>
+                    </div>
+                    <div class="w-20 h-20 flex-shrink-0 bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1518737683-e12e11a7c30d?w=800&q=80" class="w-full h-full object-cover grayscale-[20%]" alt="">
+                    </div>
+                </div>
+                <div class="flex gap-2 mt-3">
+                    <span class="text-[10px] text-gray-500 border border-gray-200 px-2 py-0.5 rounded-full">全学段</span>
+                    <span class="text-[10px] text-gray-500 border border-gray-200 px-2 py-0.5 rounded-full">三天</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tab Bar -->
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-100 pb-safe z-50">
+        <div class="flex justify-around items-center h-16">
+            <div class="flex flex-col items-center justify-center space-y-1 w-full h-full text-gray-400">
+                <i data-lucide="home" class="w-6 h-6" stroke-width="1.5"></i>
+                <span class="text-[10px] tracking-wide">首页</span>
+            </div>
+            <div class="flex flex-col items-center justify-center space-y-1 w-full h-full text-gray-400">
+                <i data-lucide="book-open" class="w-6 h-6" stroke-width="1.5"></i>
+                <span class="text-[10px] tracking-wide">课程</span>
+            </div>
+            <div class="flex flex-col items-center justify-center space-y-1 w-full h-full text-black">
+                <i data-lucide="map-pin" class="w-6 h-6" stroke-width="2"></i>
+                <span class="text-[10px] tracking-wide font-medium">线路</span>
+            </div>
+            <div class="flex flex-col items-center justify-center space-y-1 w-full h-full text-gray-400">
+                <i data-lucide="building-2" class="w-6 h-6" stroke-width="1.5"></i>
+                <span class="text-[10px] tracking-wide">基地</span>
+            </div>
+            <div class="flex flex-col items-center justify-center space-y-1 w-full h-full text-gray-400">
+                <i data-lucide="user" class="w-6 h-6" stroke-width="1.5"></i>
+                <span class="text-[10px] tracking-wide">我的</span>
+            </div>
+        </div>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
