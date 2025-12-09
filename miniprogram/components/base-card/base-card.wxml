@@ -1,0 +1,43 @@
+<!--components/base-card/base-card.wxml-->
+<!-- 横向滚动布局（首页研学营地） -->
+<view wx:if="{{mode === 'scroll'}}" class="base-card base-card--scroll" bindtap="handleTap">
+  <view class="card-image">
+    <image src="{{base.imageUrl}}" mode="aspectFill" lazy-load></image>
+    <view class="card-badge">{{base.levelName}}</view>
+  </view>
+  <text class="card-title font-serif">{{base.name}}</text>
+  <view class="card-location">
+    <view class="location-icon"></view>
+    <text>{{base.district}}</text>
+  </view>
+</view>
+
+<!-- 列表布局（基地列表页） -->
+<view wx:elif="{{mode === 'list'}}" class="base-card base-card--list" bindtap="handleTap">
+  <view class="card-image card-image--wide">
+    <image src="{{base.imageUrl}}" mode="aspectFill" lazy-load></image>
+    <view wx:if="{{base.isRecommended}}" class="card-recommend">Recommended</view>
+  </view>
+  <view class="card-content">
+    <text class="card-title card-title--large font-serif">{{base.name}}</text>
+    <view class="card-location">
+      <view class="location-icon"></view>
+      <text>{{base.district}} · {{base.levelName}}</text>
+    </view>
+  </view>
+  <view class="card-divider"></view>
+</view>
+
+<!-- 小卡片布局 -->
+<view wx:else class="base-card base-card--small" bindtap="handleTap">
+  <view class="card-image card-image--thumb">
+    <image src="{{base.imageUrl}}" mode="aspectFill" lazy-load></image>
+  </view>
+  <view class="card-content">
+    <text class="card-title card-title--small">{{base.name}}</text>
+    <view class="card-location">
+      <view class="location-icon location-icon--small"></view>
+      <text>{{base.district}}</text>
+    </view>
+  </view>
+</view>

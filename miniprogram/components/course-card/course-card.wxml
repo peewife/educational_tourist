@@ -1,0 +1,53 @@
+<!--components/course-card/course-card.wxml-->
+<!-- 横向布局（首页热门课程） -->
+<view wx:if="{{mode === 'horizontal'}}" class="course-card course-card--horizontal" bindtap="handleTap">
+  <view class="card-image card-image--square">
+    <image src="{{course.imageUrl}}" mode="aspectFill" lazy-load></image>
+  </view>
+  <view class="card-content">
+    <view class="card-header">
+      <text class="card-category">研学课程</text>
+      <text class="card-title font-serif">{{course.title}}</text>
+    </view>
+    <view class="card-tags">
+      <text class="card-tag">{{course.gradeLevel}}</text>
+      <text class="card-tag">{{course.duration}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 纵向布局（课程列表页） -->
+<view wx:elif="{{mode === 'vertical'}}" class="course-card course-card--vertical" bindtap="handleTap">
+  <view class="card-image card-image--wide">
+    <image src="{{course.imageUrl}}" mode="aspectFill" lazy-load></image>
+    <view class="card-badge">{{course.gradeLevel}}</view>
+  </view>
+  <view class="card-content">
+    <text class="card-title card-title--large font-serif">{{course.title}}</text>
+    <view class="card-stats">
+      <view class="stat-item">
+        <view class="stat-icon stat-icon--user"></view>
+        <text>{{studentCountText}} 学生</text>
+      </view>
+      <view class="stat-item">
+        <view class="stat-icon stat-icon--star"></view>
+        <text>{{ratingText}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="card-divider"></view>
+</view>
+
+<!-- 小卡片布局（基地详情关联课程） -->
+<view wx:else class="course-card course-card--small" bindtap="handleTap">
+  <view class="card-image card-image--rect">
+    <image src="{{course.imageUrl}}" mode="aspectFill" lazy-load></image>
+  </view>
+  <view class="card-content">
+    <text class="card-title card-title--small">{{course.title}}</text>
+    <view class="card-tags">
+      <text class="card-tag card-tag--small">{{course.gradeLevel}}</text>
+      <text class="card-tag card-tag--small">{{course.duration}}</text>
+    </view>
+  </view>
+</view>

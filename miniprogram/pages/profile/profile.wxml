@@ -1,0 +1,69 @@
+<!--pages/profile/profile.wxml-->
+<view class="page-container">
+  <!-- 顶部用户信息区域 -->
+  <view class="user-section" style="padding-top: {{statusBarHeight + 20}}px;">
+    <!-- 头像 -->
+    <view class="avatar-wrap" bindtap="onAvatarTap">
+      <image 
+        class="avatar {{isLoggedIn ? '' : 'grayscale'}}" 
+        src="{{userInfo.avatarUrl || 'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI9FhqmIJtfQMh0LLicJxYS9xcd2R5RMVdXRnxDnOPFYVgXYs8MicbXjuiaZDQ8Y2dEm3GpfFg/0'}}" 
+        mode="aspectFill" 
+      />
+      <view wx:if="{{!isLoggedIn}}" class="login-tip">点击登录</view>
+    </view>
+    
+    <!-- 用户名 -->
+    <text class="user-name font-serif">你好，{{userInfo.nickName}}！</text>
+    
+    <!-- 登录状态显示 -->
+    <block wx:if="{{isLoggedIn}}">
+      <text class="user-phone">已登录 · 连续签到{{signInDays}}天</text>
+    </block>
+    <block wx:else>
+      <text class="user-phone">点击头像登录，享受更多服务</text>
+    </block>
+    
+    <!-- 签到按钮 -->
+    <view 
+      class="sign-btn {{isSignedIn ? 'signed' : ''}} {{!isLoggedIn ? 'disabled' : ''}}" 
+      bindtap="onSignIn"
+    >
+      <text>{{isSignedIn ? '已签到' : '今日签到'}}</text>
+    </view>
+  </view>
+
+  <!-- 推广卡片 -->
+  <view class="promo-card" bindtap="onApplyJoin">
+    <view class="promo-content">
+      <text class="promo-title font-serif">加入我们</text>
+      <text class="promo-desc">申请成为认证研学基地或旅行机构，共同传播客家土楼文化。</text>
+      <view class="promo-btn">
+        <text>立即申请</text>
+      </view>
+    </view>
+    <view class="promo-bg"></view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <text class="menu-title font-serif">设置与工具</text>
+    <view class="menu-list">
+      <view 
+        wx:for="{{menuList}}" 
+        wx:key="id" 
+        class="menu-item {{item.id === 'logout' && !isLoggedIn ? 'hidden' : ''}}"
+        data-item="{{item}}"
+        bindtap="onMenuTap"
+      >
+        <view class="menu-left">
+          <t-icon name="{{item.icon}}" size="48rpx" color="{{item.id === 'logout' ? '#EF4444' : '#9CA3AF'}}" />
+          <text class="menu-name {{item.id === 'logout' ? 'logout-text' : ''}}">{{item.name}}</text>
+        </view>
+        <t-icon name="chevron-right" size="32rpx" color="#D1D5DB" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区域 -->
+  <view class="safe-bottom" />
+</view>

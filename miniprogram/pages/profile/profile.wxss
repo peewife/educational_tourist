@@ -1,0 +1,202 @@
+/* pages/profile/profile.wxss */
+.page-container {
+  min-height: 100vh;
+  background: #fff;
+  padding-bottom: 120rpx;
+}
+
+/* 用户信息区域 */
+.user-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 48rpx 64rpx;
+}
+
+.avatar-wrap {
+  width: 192rpx;
+  height: 192rpx;
+  border-radius: 50%;
+  padding: 4rpx;
+  border: 2rpx solid #E5E7EB;
+  margin-bottom: 32rpx;
+  position: relative;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.avatar.grayscale {
+  filter: grayscale(100%);
+}
+
+.login-tip {
+  position: absolute;
+  bottom: -8rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #C8102E;
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 16rpx;
+  border-radius: 20rpx;
+  white-space: nowrap;
+}
+
+.user-name {
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8rpx;
+}
+
+.user-phone {
+  font-size: 28rpx;
+  color: #6B7280;
+  font-weight: 300;
+}
+
+.sign-btn {
+  margin-top: 48rpx;
+  background: #C8102E;
+  color: #fff;
+  padding: 24rpx 64rpx;
+  border-radius: 100rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+  box-shadow: 0 8rpx 24rpx rgba(200, 16, 46, 0.2);
+}
+
+.sign-btn.signed {
+  background: #E5E7EB;
+  color: #6B7280;
+  box-shadow: none;
+}
+
+.sign-btn.disabled {
+  background: #F3F4F6;
+  color: #9CA3AF;
+  box-shadow: none;
+}
+
+/* 推广卡片 */
+.promo-card {
+  margin: 0 32rpx 64rpx;
+  background: #1a1a1a;
+  border-radius: 16rpx;
+  padding: 48rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.promo-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.promo-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16rpx;
+}
+
+.promo-desc {
+  font-size: 24rpx;
+  color: #9CA3AF;
+  line-height: 1.6;
+  margin-bottom: 32rpx;
+  padding: 0 32rpx;
+}
+
+.promo-btn {
+  background: #fff;
+  padding: 10rpx 32rpx;
+  border-radius: 100rpx;
+}
+
+.promo-btn text {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #000;
+}
+
+.promo-bg {
+  position: absolute;
+  top: -80rpx;
+  right: -80rpx;
+  width: 256rpx;
+  height: 256rpx;
+  background: #374151;
+  border-radius: 50%;
+  filter: blur(60rpx);
+  opacity: 0.5;
+}
+
+/* 功能菜单 */
+.menu-section {
+  padding: 0 48rpx;
+}
+
+.menu-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  display: inline-block;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #1a1a1a;
+  margin-bottom: 16rpx;
+}
+
+.menu-list {
+  border-top: 1rpx solid #F3F4F6;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 16rpx;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+.menu-item.hidden {
+  display: none;
+}
+
+.menu-item:active {
+  background: #F9FAFB;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 32rpx;
+}
+
+.menu-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #374151;
+}
+
+.menu-name.logout-text {
+  color: #EF4444;
+}
+
+/* 底部安全区域 */
+.safe-bottom {
+  height: env(safe-area-inset-bottom, 20rpx);
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}

@@ -1,0 +1,93 @@
+<!--pages/bases/bases.wxml-->
+<view class="page-container">
+  <!-- 顶部固定区域：标题 -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-content">
+      <!-- 标题栏 -->
+      <view class="title-bar">
+        <text class="app-title">基(营)地</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tab切换 (作为筛选栏) -->
+  <view class="tab-bar" style="padding-top: {{statusBarHeight + 60}}px;">
+    <view 
+      wx:for="{{tabs}}" 
+      wx:key="id"
+      class="tab-item {{currentTab === item.id ? 'active' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onTabChange"
+    >
+      <text class="tab-text">{{item.name}}</text>
+      <view wx:if="{{currentTab === item.id}}" class="tab-indicator" />
+    </view>
+  </view>
+
+  <!-- 基地列表 -->
+  <view wx:if="{{currentTab === 'bases'}}" class="content-section">
+    <block wx:if="{{baseList.length > 0}}">
+      <view 
+        wx:for="{{baseList}}" 
+        wx:key="id"
+        class="base-item"
+        bindtap="onBaseTap"
+        data-id="{{item.id}}"
+      >
+        <view class="base-cover">
+          <image class="cover-image" src="{{item.imageUrl}}" mode="aspectFill" />
+          <view wx:if="{{item.isRecommended}}" class="recommend-tag">Recommended</view>
+        </view>
+        <view class="base-info">
+          <text class="base-name">{{item.name}}</text>
+          <view class="base-meta">
+            <t-icon name="location" size="24rpx" color="#999" />
+            <text class="meta-text">{{item.district}} · {{item.levelName}}</text>
+          </view>
+        </view>
+        <view class="item-divider" />
+      </view>
+    </block>
+    <empty-state 
+      wx:if="{{!loading && baseList.length === 0}}"
+      type="data"
+      title="暂无基地"
+    />
+  </view>
+
+  <!-- 机构列表 -->
+  <view wx:if="{{currentTab === 'agencies'}}" class="content-section">
+    <block wx:if="{{agencyList.length > 0}}">
+      <view 
+        wx:for="{{agencyList}}" 
+        wx:key="id"
+        class="agency-item"
+        bindtap="onAgencyTap"
+        data-id="{{item.id}}"
+      >
+        <view class="agency-logo">
+          <text class="logo-text">{{item.logoText}}</text>
+        </view>
+        <view class="agency-info">
+          <text class="agency-name">{{item.name}}</text>
+          <text class="agency-district">{{item.district}}</text>
+        </view>
+        <view class="agency-arrow">
+          <t-icon name="chevron-right" size="32rpx" color="#ccc" />
+        </view>
+      </view>
+    </block>
+    <empty-state 
+      wx:if="{{!loading && agencyList.length === 0}}"
+      type="data"
+      title="暂无机构"
+    />
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-wrapper">
+    <t-loading theme="circular" size="40rpx" text="加载中..." />
+  </view>
+
+  <view class="safe-bottom" />
+</view>

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "target": "ES2017",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": ["ES2017"],
+    "typeRoots": ["./typings"],
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "baseUrl": "."
+  },
+  "include": [
+    "./**/*.ts",
+    "./typings/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

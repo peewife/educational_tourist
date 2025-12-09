@@ -1,0 +1,78 @@
+<!--pages/experts/experts.wxml-->
+<view class="page-container">
+  <!-- 顶部固定区域：标题 -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-content">
+      <view class="back-button" bindtap="onBackTap">
+        <t-icon name="chevron-left" size="52rpx" color="#1a1a1a" />
+      </view>
+      <!-- 标题栏 -->
+      <view class="title-bar">
+        <text class="app-title">研学专家</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 占位高度 (搜索栏在header下方) -->
+  <view style="height: {{statusBarHeight + 60}}px;"></view>
+
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <t-icon name="search" size="36rpx" color="#9CA3AF" />
+      <input 
+        class="search-input" 
+        placeholder="搜索专家姓名或证书编号" 
+        placeholder-class="search-placeholder"
+        value="{{searchValue}}"
+        bindinput="onSearchInput"
+        bindconfirm="onSearchConfirm"
+        confirm-type="search"
+      />
+      <view wx:if="{{searchValue}}" class="search-clear" bindtap="onSearchClear">
+        <t-icon name="close-circle-filled" size="32rpx" color="#9CA3AF" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类筛选 (Tab样式) -->
+  <view class="category-bar">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="id"
+      class="category-item {{currentCategory === item.id ? 'active' : ''}}"
+      data-id="{{item.id}}"
+      bindtap="onCategoryChange"
+    >
+      <text class="category-text">{{item.name}}</text>
+      <view wx:if="{{currentCategory === item.id}}" class="category-indicator" />
+    </view>
+  </view>
+
+  <!-- 导师列表 -->
+  <view class="expert-list" wx:if="{{expertList.length > 0}}">
+    <view 
+      wx:for="{{expertList}}" 
+      wx:key="id" 
+      class="expert-item"
+      data-id="{{item.id}}"
+      bindtap="onExpertTap"
+    >
+      <expert-card expert="{{item}}" mode="list" />
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <empty-state 
+    wx:if="{{!loading && expertList.length === 0}}" 
+    type="search"
+    title="暂无相关专家"
+    description="换个关键词试试"
+  />
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <t-icon name="loading" size="48rpx" color="#C8102E" class="loading-icon" />
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

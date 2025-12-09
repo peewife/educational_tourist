@@ -1,0 +1,85 @@
+<!--pages/routes/routes.wxml-->
+<view class="page-container">
+  <!-- 顶部固定区域：标题 -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-content">
+      <!-- 标题栏 -->
+      <view class="title-bar">
+        <text class="app-title">精品线路</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类筛选栏 -->
+  <view class="filter-bar" style="padding-top: {{statusBarHeight + 60}}px;">
+    <scroll-view class="filter-scroll" scroll-x enable-flex>
+      <view 
+        wx:for="{{categories}}" 
+        wx:key="id"
+        class="filter-item {{currentCategory === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCategoryChange"
+      >
+        <text class="filter-text">{{item.name}}</text>
+        <view wx:if="{{currentCategory === item.id}}" class="filter-indicator" />
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 线路列表 -->
+  <view class="route-list">
+    <block wx:if="{{routeList.length > 0}}">
+      <view 
+        wx:for="{{routeList}}" 
+        wx:key="id"
+        class="route-item"
+        bindtap="onRouteTap"
+        data-id="{{item.id}}"
+      >
+        <!-- 序号与连接线 -->
+        <view class="route-number">
+          <text class="number-text">{{index < 9 ? '0' : ''}}{{index + 1}}</text>
+          <view class="number-line" wx:if="{{index < routeList.length - 1}}" />
+        </view>
+        <!-- 内容区域 -->
+        <view class="route-content">
+          <view class="route-main">
+            <view class="route-info">
+              <text class="route-category">{{item.categoryName}}</text>
+              <text class="route-title">{{item.title}}</text>
+              <view class="route-tags">
+                <text 
+                  wx:for="{{item.gradeLevel}}" 
+                  wx:for-item="grade"
+                  wx:key="*this"
+                  class="tag-item"
+                >{{grade}}</text>
+                <text class="tag-item">{{item.duration}}</text>
+              </view>
+            </view>
+            <view class="route-cover">
+              <image class="cover-image" src="{{item.imageUrl}}" mode="aspectFill" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <empty-state 
+      wx:if="{{!loading && routeList.length === 0}}"
+      type="data"
+      title="暂无线路"
+      description="该分类下暂无线路内容"
+    />
+
+    <view wx:if="{{loading}}" class="loading-wrapper">
+      <t-loading theme="circular" size="40rpx" text="加载中..." />
+    </view>
+
+    <view wx:if="{{!hasMore && routeList.length > 0}}" class="no-more">
+      <text>— 已经到底了 —</text>
+    </view>
+  </view>
+
+  <view class="safe-bottom" />
+</view>

@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "基地详情",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "expandable-text": "/components/expandable-text/expandable-text",
+    "course-card": "/components/course-card/course-card"
+  }
+}

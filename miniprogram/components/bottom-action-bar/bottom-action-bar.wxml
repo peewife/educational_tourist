@@ -1,0 +1,63 @@
+<!--components/bottom-action-bar/bottom-action-bar.wxml-->
+<view class="action-bar">
+  <!-- 左侧区域 -->
+  <view class="action-bar__left">
+    <!-- 价格信息 -->
+    <view wx:if="{{showPrice}}" class="action-bar__price">
+      <text class="price-label">{{priceLabel}}</text>
+      <view class="price-value">
+        <text class="price-symbol">￥</text>
+        <text class="price-number">{{price}}</text>
+        <text wx:if="{{priceUnit}}" class="price-unit">{{priceUnit}}</text>
+      </view>
+    </view>
+    
+    <!-- 图标按钮组 -->
+    <view wx:if="{{showIcons}}" class="action-bar__icons">
+      <view 
+        wx:if="{{showShare}}" 
+        class="icon-btn"
+        bindtap="handleShare"
+      >
+        <view class="icon-share"></view>
+        <text class="icon-text">分享</text>
+      </view>
+      <view 
+        wx:if="{{showFavorite}}" 
+        class="icon-btn"
+        bindtap="handleFavorite"
+      >
+        <view class="icon-heart {{isFavorite ? 'icon-heart--active' : ''}}"></view>
+        <text class="icon-text">{{isFavorite ? '已收藏' : '收藏'}}</text>
+      </view>
+    </view>
+    
+    <slot name="left"></slot>
+  </view>
+  
+  <!-- 右侧按钮区域 -->
+  <view class="action-bar__right">
+    <slot name="right"></slot>
+    
+    <!-- 次要按钮 -->
+    <view 
+      wx:if="{{secondaryText}}" 
+      class="action-bar__btn action-bar__btn--secondary"
+      bindtap="handleSecondary"
+    >
+      {{secondaryText}}
+    </view>
+    
+    <!-- 主要按钮 -->
+    <view 
+      wx:if="{{primaryText}}" 
+      class="action-bar__btn action-bar__btn--primary {{primaryColor === 'orange' ? 'action-bar__btn--orange' : ''}}"
+      bindtap="handlePrimary"
+    >
+      {{primaryText}}
+    </view>
+  </view>
+</view>
+
+<!-- 安全区域占位 -->
+<view class="action-bar__safe"></view>

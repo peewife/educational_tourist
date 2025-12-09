@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "研学专家",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "expert-card": "/components/expert-card/expert-card",
+    "empty-state": "/components/empty-state/empty-state",
+    "t-icon": "tdesign-miniprogram/icon/icon"
+  }
+}

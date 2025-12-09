@@ -1,0 +1,142 @@
+/* pages/apply-mentor/apply-mentor.wxss */
+.page-container {
+  min-height: 100vh;
+  background: #fff;
+}
+
+.nav-placeholder {
+  width: 100%;
+}
+
+/* 顶部 Banner */
+.banner {
+  background: #1a1a1a;
+  padding: 96rpx 48rpx;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+}
+
+.banner-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.banner-desc {
+  font-size: 28rpx;
+  color: #9CA3AF;
+  font-weight: 300;
+}
+
+.banner-bg {
+  position: absolute;
+  top: -80rpx;
+  right: -80rpx;
+  width: 256rpx;
+  height: 256rpx;
+  background: #C8102E;
+  border-radius: 50%;
+  filter: blur(120rpx);
+  opacity: 0.4;
+}
+
+/* 表单区域 */
+.form-section {
+  padding: 64rpx 48rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 48rpx;
+}
+
+.section-dot {
+  width: 12rpx;
+  height: 12rpx;
+  background: #C8102E;
+  border-radius: 50%;
+  margin-right: 24rpx;
+}
+
+.section-dot--dark {
+  background: #1a1a1a;
+}
+
+.section-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.form-list {
+  margin-bottom: 80rpx;
+}
+
+.form-item {
+  margin-bottom: 64rpx;
+}
+
+.form-input {
+  width: 100%;
+  border-bottom: 2rpx solid #E5E7EB;
+  padding: 16rpx 0;
+  font-size: 32rpx;
+  color: #1a1a1a;
+  transition: border-color 0.3s;
+}
+
+.form-input:focus {
+  border-color: #C8102E;
+}
+
+.submit-btn {
+  background: #C8102E;
+  padding: 32rpx 0;
+  text-align: center;
+  box-shadow: 0 16rpx 48rpx rgba(200, 16, 46, 0.2);
+}
+
+.submit-btn text {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 8rpx;
+}
+
+/* 权益说明 */
+.rights-section {
+  padding: 0 48rpx 64rpx;
+}
+
+.rights-list {
+  margin-top: 32rpx;
+}
+
+.rights-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 32rpx;
+  margin-bottom: 48rpx;
+}
+
+.rights-text {
+  font-size: 28rpx;
+  color: #6B7280;
+  font-weight: 300;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}

@@ -1,0 +1,17 @@
+<!--components/expandable-text/expandable-text.wxml-->
+<view class="expandable-text">
+  <view 
+    class="text-content {{expanded ? '' : 'text-content--collapsed'}}"
+    style="{{expanded ? '' : '-webkit-line-clamp: ' + maxLines}}"
+  >
+    {{content}}
+  </view>
+  <view 
+    wx:if="{{showToggle}}" 
+    class="toggle-btn"
+    bindtap="handleToggle"
+  >
+    <text>{{expanded ? '收起' : '展开'}}</text>
+    <view class="toggle-icon {{expanded ? 'toggle-icon--up' : ''}}"></view>
+  </view>
+</view>

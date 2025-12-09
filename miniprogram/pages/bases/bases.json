@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "基(营)地",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "base-card": "/components/base-card/base-card",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

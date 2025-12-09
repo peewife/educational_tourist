@@ -1,0 +1,42 @@
+/* components/district-tags/district-tags.wxss */
+.district-tags {
+  border-top: 1rpx solid #F3F4F6;
+  padding-top: 48rpx;
+}
+
+.tags-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 32rpx;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.tag-item {
+  padding: 16rpx 32rpx;
+  border: 1rpx solid #D1D5DB;
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  color: #374151;
+  transition: all 0.3s ease;
+}
+
+.tag-item:active {
+  background: #F3F4F6;
+}
+
+.tag-item--active {
+  background: #1a1a1a;
+  color: #FFFFFF;
+  border-color: #1a1a1a;
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}

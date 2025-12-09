@@ -1,0 +1,84 @@
+<!--pages/apply-mentor/apply-mentor.wxml-->
+<view class="page-container">
+  <!-- 自定义导航栏 -->
+  <nav-bar title="申请导师" showBack="{{true}}" border="{{true}}" />
+
+  <!-- 占位高度 -->
+  <view class="nav-placeholder" style="height: {{statusBarHeight + 44}}px;"></view>
+
+  <!-- 顶部 Banner -->
+  <view class="banner">
+    <view class="banner-content">
+      <text class="banner-title font-serif">加入导师团队</text>
+      <text class="banner-desc">成为认证导师，分享您的智慧与经验</text>
+    </view>
+    <view class="banner-bg"></view>
+  </view>
+
+  <!-- 表单区域 -->
+  <view class="form-section">
+    <view class="section-header">
+      <view class="section-dot"></view>
+      <text class="section-title font-serif">个人信息</text>
+    </view>
+
+    <view class="form-list">
+      <view class="form-item">
+        <input 
+          class="form-input" 
+          placeholder="姓名"
+          value="{{formData.name}}"
+          bindinput="onNameInput"
+        />
+      </view>
+      <view class="form-item">
+        <input 
+          class="form-input" 
+          type="number"
+          placeholder="手机号码 (必填)"
+          value="{{formData.phone}}"
+          bindinput="onPhoneInput"
+        />
+      </view>
+      <view class="form-item">
+        <input 
+          class="form-input" 
+          placeholder="身份证号"
+          value="{{formData.idCard}}"
+          bindinput="onIdCardInput"
+        />
+      </view>
+    </view>
+
+    <view class="submit-btn" bindtap="onSubmit">
+      <text>提交申请</text>
+    </view>
+  </view>
+
+  <!-- 权益说明 -->
+  <view class="rights-section">
+    <view class="section-header">
+      <view class="section-dot section-dot--dark"></view>
+      <text class="section-title font-serif">权益与规则</text>
+    </view>
+
+    <view class="rights-list">
+      <view class="rights-item">
+        <t-icon name="check-circle" size="40rpx" color="#C8102E" />
+        <text class="rights-text">优先参与线下培训及认证考核</text>
+      </view>
+      <view class="rights-item">
+        <t-icon name="file" size="40rpx" color="#C8102E" />
+        <text class="rights-text">免费下载专属研学教学资料</text>
+      </view>
+      <view class="rights-item">
+        <t-icon name="add" size="40rpx" color="#C8102E" />
+        <text class="rights-text">可创建并管理自己的研学课程</text>
+      </view>
+      <view class="rights-item">
+        <t-icon name="education" size="40rpx" color="#C8102E" />
+        <text class="rights-text">优先参与导师交流活动</text>
+      </view>
+    </view>
+  </view>
+</view>

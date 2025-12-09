@@ -1,0 +1,15 @@
+<!--components/district-tags/district-tags.wxml-->
+<view class="district-tags">
+  <view class="tags-title font-serif">乡镇街道</view>
+  <view class="tags-container">
+    <view 
+      wx:for="{{districts}}" 
+      wx:key="*this" 
+      class="tag-item {{selected === item ? 'tag-item--active' : ''}}"
+      bindtap="handleTap"
+      data-district="{{item}}"
+    >
+      {{item}}
+    </view>
+  </view>
+</view>

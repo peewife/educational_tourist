@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "课程详情",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "bottom-action-bar": "/components/bottom-action-bar/bottom-action-bar",
+    "timeline": "/components/timeline/timeline",
+    "expandable-text": "/components/expandable-text/expandable-text"
+  }
+}

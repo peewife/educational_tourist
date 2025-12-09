@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完善申请信息</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .font-serif { font-family: 'Times New Roman', serif; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased min-h-screen">
+
+    <!-- Header -->
+    <div class="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-sm border-b border-gray-100">
+        <div class="h-10 w-full"></div>
+        <div class="flex items-center justify-between h-12 px-4 pb-1">
+            <div class="flex items-center flex-1">
+                <button class="p-2 -ml-3 mr-1 text-gray-900">
+                    <i data-lucide="chevron-left" class="w-[26px] h-[26px]"></i>
+                </button>
+                <h1 class="text-[20px] font-serif font-bold text-gray-900 truncate tracking-wide">完善申请信息</h1>
+            </div>
+            <div class="flex items-center space-x-3 px-3 py-1.5 rounded-full border border-gray-200 bg-white/50 backdrop-blur-md">
+                <i data-lucide="more-horizontal" class="text-gray-900 w-[18px] h-[18px]"></i>
+                <div class="w-[1px] h-4 bg-gray-300"></div>
+                <div class="relative flex items-center justify-center w-5 h-5 rounded-full border-2 border-gray-900">
+                    <div class="w-1.5 h-1.5 bg-gray-900 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="px-6 py-8">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8 font-serif">完善信息</h2>
+        
+        <div class="space-y-8">
+            <!-- 类型 (只读) -->
+            <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+                <span class="text-sm text-gray-400 font-serif">机构类型</span>
+                <div class="flex items-center space-x-2">
+                    <span class="text-gray-900 font-medium">服务机构</span>
+                    <button class="text-[#C8102E] text-xs font-bold underline">更改</button>
+                </div>
+            </div>
+
+            <!-- 机构名称 -->
+            <div class="relative group">
+                <input type="text" id="orgName" placeholder=" " class="peer w-full border-b border-gray-200 py-2 text-gray-900 focus:border-black focus:outline-none bg-transparent transition-colors placeholder-transparent" />
+                <label for="orgName" class="absolute left-0 -top-3.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-black">机构名称</label>
+            </div>
+
+            <!-- 联系人 -->
+            <div class="relative group">
+                <input type="text" id="contact" placeholder=" " class="peer w-full border-b border-gray-200 py-2 text-gray-900 focus:border-black focus:outline-none bg-transparent transition-colors placeholder-transparent" />
+                <label for="contact" class="absolute left-0 -top-3.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-black">联系人</label>
+            </div>
+
+            <!-- 联系电话 -->
+            <div class="relative group">
+                <input type="tel" id="phone" placeholder=" " class="peer w-full border-b border-gray-200 py-2 text-gray-900 focus:border-black focus:outline-none bg-transparent transition-colors placeholder-transparent" />
+                <label for="phone" class="absolute left-0 -top-3.5 text-xs text-gray-400 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-gray-400 peer-focus:-top-3.5 peer-focus:text-xs peer-focus:text-black">联系电话</label>
+            </div>
+
+            <!-- 地址选择 -->
+            <div class="relative group flex items-end">
+                <div class="flex-1 relative">
+                    <input type="text" id="address" readonly placeholder=" " class="peer w-full border-b border-gray-200 py-2 text-gray-900 focus:border-black focus:outline-none bg-transparent" />
+                    <label for="address" class="absolute left-0 -top-3.5 text-xs text-gray-400">详细地址</label>
+                </div>
+                <button class="ml-2 mb-2 text-gray-400 hover:text-[#C8102E] transition-colors">
+                    <i data-lucide="map" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- 简介 -->
+            <div class="relative mt-4">
+                <label class="text-xs text-gray-400 block mb-2">机构简介</label>
+                <textarea class="w-full h-24 border border-gray-200 p-3 text-sm text-gray-900 focus:border-black focus:outline-none resize-none font-light" placeholder="请简要描述您的机构..."></textarea>
+            </div>
+        </div>
+
+        <!-- 图片上传 -->
+        <div class="mt-10">
+            <div class="flex justify-between items-end mb-4">
+                <span class="text-sm font-bold text-gray-900 font-serif">图片与封面</span>
+                <span class="text-[10px] text-gray-400">最多6张图片</span>
+            </div>
+            <div class="flex gap-3">
+                <div class="w-24 h-24 border border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-300 hover:border-[#C8102E] hover:text-[#C8102E] transition-colors cursor-pointer">
+                    <i data-lucide="plus" class="w-6 h-6"></i>
+                    <span class="text-[10px] mt-1">上传</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="w-full mt-12 bg-black text-white py-4 rounded-sm font-bold text-sm tracking-widest hover:bg-[#C8102E] transition-colors shadow-xl">
+            提交申请
+        </button>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

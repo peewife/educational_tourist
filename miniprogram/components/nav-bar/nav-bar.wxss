@@ -1,0 +1,96 @@
+/* components/nav-bar/nav-bar.wxss */
+.nav-bar {
+  width: 100%;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-bar--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.nav-bar--border {
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.nav-bar__status {
+  width: 100%;
+}
+
+.nav-bar__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16rpx;
+  box-sizing: border-box;
+}
+
+.nav-bar__left {
+  display: flex;
+  align-items: center;
+  min-width: 80rpx;
+}
+
+.nav-bar__back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64rpx;
+  height: 64rpx;
+  margin-left: -8rpx;
+}
+
+.nav-bar__back-icon {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow {
+  width: 20rpx;
+  height: 20rpx;
+  border-left: 4rpx solid #1a1a1a;
+  border-bottom: 4rpx solid #1a1a1a;
+  transform: rotate(45deg);
+  margin-left: 8rpx;
+}
+
+.nav-bar__title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-left: 8rpx;
+}
+
+.nav-bar__title-text {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 1rpx;
+}
+
+.nav-bar__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-bar__placeholder {
+  width: 100%;
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}

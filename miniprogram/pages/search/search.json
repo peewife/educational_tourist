@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "搜索",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "course-card": "/components/course-card/course-card",
+    "route-card": "/components/route-card/route-card",
+    "base-card": "/components/base-card/base-card",
+    "empty-state": "/components/empty-state/empty-state",
+    "t-icon": "tdesign-miniprogram/icon/icon"
+  }
+}

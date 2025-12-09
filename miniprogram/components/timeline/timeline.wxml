@@ -1,0 +1,26 @@
+<!--components/timeline/timeline.wxml-->
+<view class="timeline">
+  <view 
+    wx:for="{{items}}" 
+    wx:key="index" 
+    class="timeline-item"
+  >
+    <!-- 时间轴线和节点 -->
+    <view class="timeline-line">
+      <view class="timeline-dot {{color === 'red' ? 'timeline-dot--red' : 'timeline-dot--blue'}}"></view>
+      <view wx:if="{{index < items.length - 1}}" class="timeline-connector"></view>
+    </view>
+    
+    <!-- 内容区域 -->
+    <view class="timeline-content">
+      <text class="timeline-time {{color === 'red' ? 'timeline-time--red' : 'timeline-time--blue'}}">{{item.time}}</text>
+      <text class="timeline-title font-serif">{{item.title}}</text>
+      <text wx:if="{{item.description}}" class="timeline-desc">{{item.description}}</text>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view wx:if="{{!items || items.length === 0}}" class="timeline-empty">
+    <text>暂无行程数据</text>
+  </view>
+</view>

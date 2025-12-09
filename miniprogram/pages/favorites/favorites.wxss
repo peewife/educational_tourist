@@ -1,0 +1,93 @@
+/* pages/favorites/favorites.wxss */
+@import '/styles/theme.wxss';
+@import '/styles/common.wxss';
+
+.page-container {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+/* 顶部固定区域 (保持与详情页一致的风格) */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx 20rpx;
+  height: 88rpx;
+}
+
+/* 标题栏 */
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+}
+
+.app-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: -1rpx;
+}
+
+.back-button {
+  position: relative;
+  z-index: 1;
+  padding: 16rpx;
+  margin-left: -16rpx;
+}
+
+.nav-placeholder {
+  width: 100%;
+}
+
+/* 收藏列表 */
+.favorite-list {
+  padding: 0 32rpx;
+}
+
+.favorite-item {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #F3F4F6;
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
+}
+
+/* 加载状态 */
+.loading-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+}
+
+.loading-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 24rpx;
+  color: #9CA3AF;
+  margin-top: 16rpx;
+}

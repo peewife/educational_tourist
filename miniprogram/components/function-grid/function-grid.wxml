@@ -1,0 +1,19 @@
+<!--components/function-grid/function-grid.wxml-->
+<view class="function-grid">
+  <view class="grid-title font-serif">功能入口</view>
+  <view class="grid-container">
+    <view 
+      wx:for="{{items}}" 
+      wx:key="id" 
+      class="grid-item {{item.disabled ? 'grid-item--disabled' : ''}}"
+      bindtap="handleTap"
+      data-item="{{item}}"
+    >
+      <view class="item-icon">
+        <!-- 使用内联SVG图标 -->
+        <view class="icon icon--{{item.icon}}"></view>
+      </view>
+      <text class="item-name">{{item.name}}</text>
+    </view>
+  </view>
+</view>

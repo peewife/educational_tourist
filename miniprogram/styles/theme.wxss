@@ -1,0 +1,67 @@
+/* TDesign 主题覆盖 */
+page {
+  /* 品牌色 */
+  --td-brand-color: #C8102E;
+  --td-brand-color-light: #FFF0F0;
+  --td-brand-color-focus: #E8354D;
+  --td-brand-color-active: #A00D25;
+  --td-brand-color-disabled: #F5A3A3;
+  
+  /* 功能色 */
+  --td-error-color: #FF4D4F;
+  --td-success-color: #36C197;
+  --td-warning-color: #FAAD14;
+  --td-info-color: #4A90E2;
+  
+  /* 背景色 */
+  --td-bg-color-page: #F5F7FA;
+  --td-bg-color-container: #FFFFFF;
+  --td-bg-color-container-active: #F5F5F5;
+  --td-bg-color-secondarycontainer: #FAFAFA;
+  
+  /* 文字色 */
+  --td-text-color-primary: #1a1a1a;
+  --td-text-color-secondary: #666666;
+  --td-text-color-placeholder: #999999;
+  --td-text-color-disabled: #CCCCCC;
+  --td-text-color-brand: #C8102E;
+  
+  /* 边框色 */
+  --td-border-color: #e5e5e5;
+  --td-component-border: #e5e5e5;
+  
+  /* 圆角 */
+  --td-radius-small: 4rpx;
+  --td-radius-default: 8rpx;
+  --td-radius-large: 16rpx;
+  --td-radius-round: 999rpx;
+}
+
+/* 主题色变量 */
+.theme-primary {
+  color: #C8102E;
+}
+
+.theme-secondary {
+  color: #FF6B00;
+}
+
+.theme-info {
+  color: #4A90E2;
+}
+
+.theme-success {
+  color: #36C197;
+}
+
+.bg-primary {
+  background-color: #C8102E;
+}
+
+.bg-secondary {
+  background-color: #FF6B00;
+}
+
+.bg-page {
+  background-color: #F5F7FA;
+}

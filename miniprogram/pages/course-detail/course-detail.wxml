@@ -1,0 +1,137 @@
+<!--pages/course-detail/course-detail.wxml-->
+<view class="page-container">
+  <!-- 顶部固定区域：标题 -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-content">
+      <view class="back-button" bindtap="onBackTap">
+        <t-icon name="chevron-left" size="52rpx" color="#1a1a1a" />
+      </view>
+      <!-- 标题栏 -->
+      <view class="title-bar">
+        <text class="app-title">课程详情</text>
+      </view>
+    </view>
+  </view>
+
+  <view style="height: {{statusBarHeight + 108}}rpx;"></view> <!-- Placeholder for fixed header -->
+
+  <block wx:if="{{course}}">
+    <!-- 课程封面图轮播 -->
+    <view class="cover-section">
+      <swiper 
+        class="cover-swiper"
+        indicator-dots="{{false}}"
+        autoplay="{{true}}"
+        interval="{{4000}}"
+        duration="{{500}}"
+        circular="{{true}}"
+        bindchange="onSwiperChange"
+      >
+        <swiper-item wx:for="{{imageList}}" wx:key="*this">
+          <image class="cover-image" src="{{item}}" mode="aspectFill" />
+        </swiper-item>
+      </swiper>
+      <!-- 自定义指示器 -->
+      <view class="swiper-indicator" wx:if="{{imageList.length > 1}}">
+        <text class="indicator-text">{{currentImageIndex + 1}}/{{imageList.length}}</text>
+      </view>
+    </view>
+
+    <!-- 课程基本信息 -->
+    <view class="info-section">
+      <text class="course-title">{{course.title}}</text>
+      <view class="info-list">
+        <view class="info-item">
+          <text class="info-label">适用学段:</text>
+          <text class="info-value">{{course.gradeLevel}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">课程时长:</text>
+          <text class="info-value">{{course.duration}}</text>
+        </view>
+      </view>
+
+      <!-- 相关基地卡片 -->
+      <view class="location-card" wx:if="{{baseDetail}}" bindtap="onBaseTap">
+        <view class="location-info">
+          <view class="location-icon-box">
+            <t-icon name="flag" size="40rpx" color="var(--td-brand-color)" />
+          </view>
+          <view class="location-detail">
+            <text class="location-title">相关基地</text>
+            <text class="location-address">{{baseDetail.name}}</text>
+          </view>
+        </view>
+        <view class="location-actions">
+           <t-icon name="navigation" size="40rpx" color="#999" catchtap="onBaseNavigationTap" />
+           <t-icon name="call" size="40rpx" color="#999" catchtap="onBasePhoneTap" />
+           <t-icon name="chevron-right" size="40rpx" color="#ccc" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 分隔条 -->
+    <view class="divider" />
+
+    <!-- Tab切换 -->
+    <view class="tab-bar" style="top: {{statusBarHeight + 108}}rpx;">
+      <view 
+        wx:for="{{tabs}}" 
+        wx:key="id"
+        class="tab-item {{currentTab === item.id ? 'active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onTabChange"
+      >
+        <text class="tab-text">{{item.name}}</text>
+        <view wx:if="{{currentTab === item.id}}" class="tab-indicator" />
+      </view>
+    </view>
+
+    <!-- Tab内容区域 -->
+    <view class="tab-content">
+      <!-- 课程详情 -->
+      <view wx:if="{{currentTab === 'detail'}}" class="detail-content">
+        <expandable-text 
+          content="{{course.description}}" 
+          maxLines="{{6}}"
+        />
+      </view>
+
+      <!-- 课程安排 -->
+      <view wx:if="{{currentTab === 'schedule'}}" class="schedule-content">
+        <timeline 
+          wx:if="{{course.schedule && course.schedule.length > 0}}"
+          items="{{course.schedule}}" 
+          theme="red"
+        />
+        <view wx:else class="empty-tip">暂无课程安排</view>
+      </view>
+
+      <!-- 费用明细 -->
+      <view wx:if="{{currentTab === 'fees'}}" class="fees-content">
+        <view class="price-row">
+          <text class="price-label">研学费用:</text>
+          <text class="price-value">{{course.price}}</text>
+          <text class="price-unit">元/人</text>
+        </view>
+        <text class="fee-desc">{{course.feeDescription || '费用包含：交通、餐饮、保险、导师费等。'}}</text>
+      </view>
+    </view>
+
+    <!-- 底部安全区域 -->
+    <view class="safe-bottom" />
+  </block>
+
+  <!-- 底部操作栏 -->
+  <bottom-action-bar 
+    wx:if="{{course}}"
+    primaryText="立即报名"
+    showIcons="{{true}}"
+    showShare="{{true}}"
+    showFavorite="{{true}}"
+    isFavorite="{{isFavorite}}"
+    bind:share="onShareTap"
+    bind:favorite="onFavoriteTap"
+    bind:primary="onEnrollTap"
+  />
+</view>

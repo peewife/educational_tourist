@@ -1,0 +1,45 @@
+<!--pages/favorites/favorites.wxml-->
+<view class="page-container">
+  <!-- 顶部固定区域：标题 -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-content">
+      <view class="back-button" bindtap="onBackTap">
+        <t-icon name="chevron-left" size="52rpx" color="#1a1a1a" />
+      </view>
+      <!-- 标题栏 -->
+      <view class="title-bar">
+        <text class="app-title">收藏课程</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 占位高度 -->
+  <view style="height: calc({{statusBarHeight}}px + 108rpx);"></view>
+
+  <!-- 收藏列表 -->
+  <view class="favorite-list" wx:if="{{favoriteList.length > 0}}">
+    <view 
+      wx:for="{{favoriteList}}" 
+      wx:key="id" 
+      class="favorite-item"
+      data-id="{{item.id}}"
+      bindtap="onCourseTap"
+    >
+      <course-card course="{{item}}" mode="horizontal" />
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <empty-state 
+    wx:if="{{!loading && favoriteList.length === 0}}" 
+    type="data"
+    title="暂无收藏课程"
+    description="去发现感兴趣的课程吧"
+  />
+
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="loading-wrap">
+    <t-icon name="loading" size="48rpx" color="#C8102E" class="loading-icon" />
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>

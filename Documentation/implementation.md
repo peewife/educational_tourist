@@ -1,151 +1,505 @@
 # 永定研学小程序开发规范
 
-> 技术栈: 微信小程序原生 + TDesign UI + 微信云开发 + TypeScript | 主题色: 客家红 #C8102E
-
----
+> 技术栈: 微信小程序原生 + TypeScript + TDesign UI | 主题色: 客家红 #C8102E
 
 ## 1. 项目结构
 
 ```
 yongding-study/
 ├── miniprogram/
-│   ├── pages/           # 页面目录
-│   │   ├── index/             # 首页（搜索框+Banner+功能入口+乡镇标签+热门列表）
-│   │   ├── courses/           # 课程列表（分类Tab+卡片列表）
-│   │   ├── course-detail/     # 课程详情（Tabs切换+行程时间轴+底部操作栏）
-│   │   ├── routes/            # 线路列表（分类筛选+卡片列表）
-│   │   ├── route-detail/      # 线路详情（关联基地+公司信息+费用明细）
-│   │   ├── bases/             # 基地/机构列表（子Tab切换+搜索+列表）
-│   │   ├── base-detail/       # 基地详情（大图+地址导航+关联课程）
-│   │   ├── agency-detail/     # 机构详情（Logo展示+简介+关联线路/导师）
-│   │   ├── experts/           # 导师列表（搜索+角色分类+卡片列表）
-│   │   ├── profile/           # 个人中心（头像+签到+推广卡片+功能列表）
-│   │   └── search/            # 搜索页
-│   ├── components/      # 组件目录（详见§3）
-│   ├── services/        # 云函数封装（course/route/base/expert/user）
-│   ├── utils/           # 工具函数（cloud/auth/storage/format/navigator）
-│   ├── typings/         # 类型定义目录
-│   ├── config/          # 配置文件（theme/api/constants）
-│   ├── styles/          # 公共样式（theme/tdesign/common）
-│   ├── assets/          # 静态资源（images/icons/fonts）
-│   ├── app.ts           # 入口文件
-│   ├── app.json         # 全局配置
-│   └── app.wxss         # 全局样式
-├── cloudfunctions/      # 云函数目录
-├── tsconfig.json        # TypeScript配置
-├── typings/             # 小程序API类型声明
-└── project.config.json  # 项目配置
+│   ├── pages/                    # 页面目录
+│   │   ├── index/                # 首页 (TabBar)
+│   │   ├── courses/              # 课程列表 (TabBar)
+│   │   ├── course-detail/        # 课程详情
+│   │   ├── routes/               # 线路列表 (TabBar)
+│   │   ├── route-detail/         # 线路详情
+│   │   ├── bases/                # 基地/机构列表 (TabBar)
+│   │   ├── base-detail/          # 基地详情
+│   │   ├── agency-detail/        # 机构详情
+│   │   ├── experts/              # 导师列表
+│   │   ├── expert-detail/        # 导师详情
+│   │   ├── profile/              # 个人中心 (TabBar)
+│   │   ├── favorites/            # 收藏列表
+│   │   ├── search/               # 搜索页
+│   │   ├── apply-mentor/         # 申请导师
+│   │   ├── join-selection/       # 入驻选择
+│   │   └── org-apply/            # 机构申请
+│   ├── components/               # 组件目录
+│   │   ├── function-grid/        # 功能入口网格
+│   │   ├── district-tags/        # 乡镇街道标签
+│   │   ├── course-card/          # 课程卡片
+│   │   ├── route-card/           # 线路卡片
+│   │   ├── base-card/            # 基地卡片
+│   │   ├── expert-card/          # 导师卡片
+│   │   ├── bottom-action-bar/    # 底部操作栏
+│   │   ├── expandable-text/      # 展开/收起文本
+│   │   ├── timeline/             # 时间轴
+│   │   ├── empty-state/          # 空状态
+│   │   └── nav-bar/              # 自定义导航栏
+│   ├── services/                 # 服务层
+│   │   └── favorite.ts           # 收藏服务
+│   ├── mock/                     # Mock数据
+│   │   ├── home.ts               # 首页数据
+│   │   ├── courses.ts            # 课程数据
+│   │   ├── routes.ts             # 线路数据
+│   │   ├── bases.ts              # 基地/机构数据
+│   │   └── experts.ts            # 导师数据
+│   ├── styles/                   # 公共样式
+│   │   ├── theme.wxss            # 主题变量
+│   │   └── common.wxss           # 通用样式
+│   ├── assets/                   # 静态资源
+│   │   └── icons/                # TabBar图标
+│   └── app.ts/json/wxss          # 入口文件
+└── project.config.json
 ```
 
-### 1.1 文件命名规范
+**文件规范:** 每个页面/组件 = wxml + ts + json + wxss 四件套
 
-| 类型 | 命名规则 | 示例 |
-|------|---------|------|
-| 页面目录 | 小写+连字符 | `course-detail/` |
-| 页面文件 | 与目录同名 | `course-detail.ts/.wxml/.json/.wxss` |
-| 组件目录 | 小写+连字符 | `course-card/` |
-| 服务文件 | 小写+单数 | `course.ts`, `user.ts` |
-| 类型文件 | 小写+.d.ts | `models.d.ts`, `api.d.ts` |
-| 工具文件 | 小写+功能名 | `navigator.ts`, `format.ts` |
+## 2. 页面实现
 
-### 1.2 TypeScript 配置要求
+### 2.1 首页 (index)
 
-**tsconfig.json 必须配置项：**
-- `strict: true` - 启用严格模式
-- `strictNullChecks: true` - 严格空值检查
-- `noImplicitAny: true` - 禁止隐式any
-- `paths: { "@/*": ["miniprogram/*"] }` - 路径别名
+**功能模块:**
+- 自定义导航栏 (品牌标题 + 搜索框)
+- Banner轮播图 (自动播放 + 自定义指示器)
+- 功能入口网格 (9宫格，支持disabled状态)
+- 乡镇街道标签 (点击提示"功能开发中")
+- 热门课程列表 (横向卡片)
+- 热门线路列表 (横向卡片)
+- 研学营地横向滚动
 
-**project.config.json 必须配置项：**
-- `setting.useCompilerPlugins: ["typescript"]` - 启用TS编译
+```typescript
+// pages/index/index.ts
+import { banners, functionEntries, districts } from '../../mock/home';
+import { courses } from '../../mock/courses';
+import { routes } from '../../mock/routes';
+import { bases } from '../../mock/bases';
 
-## 2. Page页面规范
+Page({
+  data: {
+    statusBarHeight: 20,
+    banners: [] as IBanner[],
+    currentBannerIndex: 0,
+    functionEntries: [] as IFunctionEntry[],
+    districts: [] as string[],
+    hotCourses: [] as ICourse[],
+    hotRoutes: [] as IRoute[],
+    hotBases: [] as IBase[],
+    selectedDistrict: ''
+  },
+  onLoad() {
+    this.initSystemInfo();
+    this.loadHomeData();
+  },
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({ selected: 0 });
+    }
+  }
+});
+```
 
-### 2.1 生命周期
+### 2.2 课程列表 (courses)
 
-| 生命周期 | 触发时机 | 常用场景 |
-|----------|---------|----------|
-| onLoad | 页面加载时 | 获取路由参数、初始化数据 |
-| onShow | 页面显示时 | 刷新数据、恢复定时器 |
-| onReady | 页面渲染完成 | DOM操作、动画初始化 |
-| onHide | 页面隐藏时 | 清除定时器、暂停播放 |
-| onUnload | 页面卸载时 | 清理资源 |
+**功能模块:**
+- 分类筛选栏 (最新/客家文化/红色教育/科学探究/非遗体验)
+- 课程列表 (大图+信息布局)
+- 分页加载 + 下拉刷新
 
-### 2.2 页面事件
+```typescript
+// 课程分类
+const categories = [
+  { id: 'all', name: '最新' },
+  { id: 'culture', name: '客家文化' },
+  { id: 'red', name: '红色教育' },
+  { id: 'science', name: '科学探究' },
+  { id: 'intangible', name: '非遗体验' }
+];
+```
 
-| 事件 | 触发时机 | 使用场景 |
-|------|---------|----------|
-| onPullDownRefresh | 下拉刷新 | 列表重置并重新加载 |
-| onReachBottom | 触底事件 | 分页加载更多 |
-| onShareAppMessage | 分享小程序 | 返回分享配置 |
-| onPageScroll | 页面滚动 | 导航栏透明度变化 |
+### 2.3 课程详情 (course-detail)
 
-### 2.3 数据管理原则
+**功能模块:**
+- 封面大图
+- 基本信息 (学段/时长)
+- 相关基地卡片 (支持导航/电话)
+- Tab切换 (课程详情/课程安排/费用明细)
+- 底部操作栏 (分享/收藏/报名)
 
-- **data只存渲染数据** - 列表、加载状态、分类等
-- **非渲染数据用this.xxx** - 分页参数、缓存数据
-- **异步方法用async/await** - 数据请求、云函数调用
-- **统一调用Service层** - 不直接调用wx.cloud
+### 2.4 线路列表 (routes)
 
----
+**功能模块:**
+- 分类筛选 (全部/自然生态/红色研学/文化遗产/劳动实践/地质科普)
+- 时间轴样式列表 (序号+连接线)
 
-## 3. Component组件规范
+```typescript
+const categories = [
+  { id: 'all', name: '全部' },
+  { id: 'nature', name: '自然生态' },
+  { id: 'red', name: '红色研学' },
+  { id: 'culture', name: '文化遗产' },
+  { id: 'labor', name: '劳动实践' },
+  { id: 'geology', name: '地质科普' }
+];
+```
 
-### 3.1 生命周期
+### 2.5 线路详情 (route-detail)
 
-**组件生命周期 (lifetimes):**
+**功能模块:**
+- 封面大图
+- 基本信息 (学段/天数/相关基地)
+- 机构信息卡片
+- Tab切换 (线路详情/线路安排/费用明细)
+- 底部操作栏 (价格+电话咨询+报名)
 
-| 生命周期 | 触发时机 |
-|----------|----------|
-| created | 组件创建时 |
-| attached | 组件挂载时 |
-| ready | 组件渲染完成 |
-| detached | 组件卸载时 |
+### 2.6 基地列表 (bases)
 
-**页面生命周期 (pageLifetimes):**
+**功能模块:**
+- Tab切换 (研学基(营)地 / 服务机构)
+- 基地列表 (大图+信息)
+- 机构列表 (Logo+信息)
 
-| 生命周期 | 触发时机 |
-|----------|----------|
-| show | 所在页面显示 |
-| hide | 所在页面隐藏 |
-| resize | 页面尺寸变化 |
+### 2.7 导师列表 (experts)
 
-### 3.2 组件配置选项
+**功能模块:**
+- 搜索框 (姓名/证书编号)
+- 分类筛选 (全部/研学导师/研学教官/研究员/非遗传承)
+- 导师卡片列表
 
-| 配置项 | 说明 | 推荐值 |
-|-------|------|--------|
-| multipleSlots | 启用多插槽 | true |
-| styleIsolation | 样式隔离 | 'isolated' |
-| pureDataPattern | 纯数据字段正则 | /^_/ |
+### 2.8 个人中心 (profile)
 
-### 3.3 命名约定
+**功能模块:**
+- 用户信息区 (头像/昵称/签到)
+- 推广卡片 (申请入驻)
+- 功能菜单 (收藏课程/投诉建议/实践活动/活动报名/申请导师)
 
-- **properties用驼峰** - `propertyName`
-- **wxml用连字符** - `property-name`
-- **私有方法用_前缀** - `_loadData()`
-- **事件处理用handle前缀** - `handleTap()`
+### 2.9 搜索页 (search)
 
-### 3.4 组件清单
+**功能模块:**
+- 搜索输入框
+- 搜索类型切换 (全部/课程/线路/基地)
+- 热门搜索标签
+- 搜索历史 (本地存储)
+- 搜索结果展示
 
-| 组件名 | 用途 | TDesign映射 |
-|-------|------|------------|
-| nav-bar | 自定义导航栏(返回+标题+胶囊) | t-navbar |
-| search-bar | 搜索框 | t-search |
-| course-card | 课程卡片(横向/纵向) | - |
-| route-card | 线路卡片 | - |
-| base-card | 基地卡片 | - |
-| agency-card | 机构卡片 | - |
-| expert-card | 导师卡片 | - |
-| bottom-action-bar | 底部悬浮操作栏 | - |
-| expandable-text | 展开/收起文本 | - |
-| timeline | 时间轴(行程安排) | t-steps |
-| tag-group | 标签组(分类筛选) | t-tag |
-| empty-state | 空状态占位 | t-empty |
-| function-grid | 功能入口网格(10项) | - |
-| district-tags | 乡镇标签组 | t-tag |
-| banner-swiper | 首页Banner轮播 | t-swiper |
+## 3. 组件清单
 
-## 4. app.json配置
+| 组件名 | 用途 | 展示模式 |
+| --- | --- | --- |
+| function-grid | 首页功能入口网格 | 9宫格布局 |
+| district-tags | 乡镇街道标签 | 流式标签 |
+| course-card | 课程卡片 | horizontal/vertical/small |
+| route-card | 线路卡片 | horizontal/timeline/small |
+| base-card | 基地卡片 | scroll/list/small |
+| expert-card | 导师卡片 | list/grid |
+| bottom-action-bar | 底部操作栏 | 价格+按钮/图标+按钮 |
+| expandable-text | 展开收起文本 | 可配置行数 |
+| timeline | 时间轴 | red/blue主题 |
+| empty-state | 空状态 | search/data/network/error |
+| nav-bar | 自定义导航栏 | - |
+
+### 3.1 function-grid 功能入口组件
+
+```typescript
+Component({
+  properties: {
+    items: { type: Array, value: [] }
+  },
+  methods: {
+    handleTap(e: any) {
+      const item = e.currentTarget.dataset.item;
+      if (item.disabled) {
+        wx.showToast({ title: '功能开发中', icon: 'none' });
+        return;
+      }
+      if (item.path) {
+        if (item.path.startsWith('switchTab:')) {
+          if (item.extra) {
+            const app = getApp() as any;
+            app.globalData.pageParams = item.extra;
+          }
+          wx.switchTab({ url: item.path.replace('switchTab:', '') });
+        } else {
+          wx.navigateTo({ url: item.path });
+        }
+      }
+    }
+  }
+})
+```
+
+### 3.2 district-tags 乡镇街道组件
+
+```typescript
+Component({
+  properties: {
+    districts: { type: Array, value: [] },
+    selected: { type: String, value: '' }
+  },
+  methods: {
+    handleTap(e: any) {
+      const district = e.currentTarget.dataset.district;
+      wx.showToast({ title: '功能开发中', icon: 'none', duration: 1500 });
+      this.triggerEvent('select', { district });
+    }
+  }
+})
+```
+
+### 3.3 course-card 课程卡片组件
+
+```typescript
+Component({
+  properties: {
+    course: { type: Object, value: {} },
+    mode: { type: String, value: 'horizontal' } // horizontal | vertical | small
+  },
+  observers: {
+    course(course) {
+      // 格式化学生数和评分
+      const studentCountText = course?.studentCount >= 1000 
+        ? `${(course.studentCount / 1000).toFixed(1)}k` 
+        : `${course?.studentCount || 0}`;
+      this.setData({ studentCountText, ratingText: String(course?.rating || 0) });
+    }
+  },
+  methods: {
+    handleTap() {
+      wx.navigateTo({ url: `/pages/course-detail/course-detail?id=${this.data.course.id}` });
+    }
+  }
+})
+```
+
+### 3.4 bottom-action-bar 底部操作栏组件
+
+```typescript
+Component({
+  properties: {
+    showPrice: { type: Boolean, value: false },
+    price: { type: Number, value: 0 },
+    priceLabel: { type: String, value: '参考价' },
+    priceUnit: { type: String, value: '' },
+    showIcons: { type: Boolean, value: false },
+    showShare: { type: Boolean, value: true },
+    showFavorite: { type: Boolean, value: true },
+    isFavorite: { type: Boolean, value: false },
+    primaryText: { type: String, value: '立即报名' },
+    primaryColor: { type: String, value: 'red' }, // red | orange
+    secondaryText: { type: String, value: '' }
+  },
+  methods: {
+    handleShare() { this.triggerEvent('share'); },
+    handleFavorite() { this.triggerEvent('favorite', { isFavorite: !this.data.isFavorite }); },
+    handlePrimary() { this.triggerEvent('primary'); },
+    handleSecondary() { this.triggerEvent('secondary'); }
+  }
+})
+```
+
+### 3.5 expandable-text 展开收起组件
+
+```typescript
+Component({
+  properties: {
+    content: { type: String, value: '' },
+    maxLines: { type: Number, value: 6 }
+  },
+  data: { expanded: false },
+  methods: {
+    handleToggle() {
+      this.setData({ expanded: !this.data.expanded });
+    }
+  }
+})
+```
+
+### 3.6 timeline 时间轴组件
+
+```typescript
+Component({
+  properties: {
+    items: { type: Array, value: [] },
+    color: { type: String, value: 'red' } // red | blue
+  }
+})
+```
+
+## 4. 服务层
+
+### 4.1 收藏服务 (favorite.ts)
+
+```typescript
+const FAVORITE_KEY = 'favorite_courses';
+
+export function getFavorites(): string[] {
+  const data = wx.getStorageSync(FAVORITE_KEY);
+  return data ? JSON.parse(data) : [];
+}
+
+export function addFavorite(courseId: string): boolean {
+  const favorites = getFavorites();
+  if (!favorites.includes(courseId)) {
+    favorites.unshift(courseId);
+    wx.setStorageSync(FAVORITE_KEY, JSON.stringify(favorites));
+  }
+  return true;
+}
+
+export function removeFavorite(courseId: string): boolean {
+  const favorites = getFavorites();
+  const index = favorites.indexOf(courseId);
+  if (index > -1) {
+    favorites.splice(index, 1);
+    wx.setStorageSync(FAVORITE_KEY, JSON.stringify(favorites));
+  }
+  return true;
+}
+
+export function isFavorite(courseId: string): boolean {
+  return getFavorites().includes(courseId);
+}
+
+export function toggleFavorite(courseId: string): boolean {
+  if (isFavorite(courseId)) {
+    removeFavorite(courseId);
+    return false;
+  } else {
+    addFavorite(courseId);
+    return true;
+  }
+}
+```
+
+## 5. Mock数据结构
+
+### 5.1 首页数据 (home.ts)
+
+```typescript
+// Banner数据
+export const banners: IBanner[] = [
+  { id: '1', imageUrl: '...', title: '探索世界文化遗产永定土楼', subtitle: '今日推荐', linkType: 'course', linkId: '1' }
+];
+
+// 功能入口
+export const functionEntries: IFunctionEntry[] = [
+  { id: '1', name: '资讯', icon: 'file-text', disabled: true },
+  { id: '2', name: '课程', icon: 'book-open', path: 'switchTab:/pages/courses/courses' },
+  { id: '3', name: '线路', icon: 'map-pin', path: 'switchTab:/pages/routes/routes' },
+  { id: '4', name: '基(营)地', icon: 'building-2', path: 'switchTab:/pages/bases/bases' },
+  { id: '5', name: '机构', icon: 'layout-grid', path: 'switchTab:/pages/bases/bases', extra: { tab: 'agencies' } },
+  { id: '6', name: '精品线路', icon: 'compass', disabled: true },
+  { id: '7', name: '研学导师', icon: 'graduation-cap', path: '/pages/experts/experts' },
+  { id: '8', name: '公示', icon: 'award', disabled: true },
+  { id: '9', name: '服务', icon: 'heart', disabled: true }
+];
+
+// 乡镇街道
+export const districts: string[] = ['凤城街道', '坎市镇', '下洋镇', '湖坑镇', '高陂镇', '抚市镇', '湖雷镇', '培丰镇'];
+```
+
+### 5.2 课程数据 (courses.ts)
+
+```typescript
+interface ICourse {
+  id: string;
+  title: string;
+  category: string;           // culture | red | science | intangible
+  categoryName: string;
+  imageUrl: string;
+  gradeLevel: string;         // 小学 | 初中 | 高中 | 全学段
+  duration: string;
+  baseId?: string;
+  baseName?: string;
+  price: number;
+  studentCount?: number;
+  rating?: number;
+  description: string;
+  schedule?: IScheduleItem[];
+  feeDescription?: string;
+  tags?: string[];
+  status: string;
+}
+```
+
+### 5.3 线路数据 (routes.ts)
+
+```typescript
+interface IRoute {
+  id: string;
+  title: string;
+  category: string;           // nature | red | culture | labor | geology
+  categoryName: string;
+  imageUrl: string;
+  gradeLevel: string[];
+  duration: string;
+  agencyId?: string;
+  agencyName?: string;
+  baseIds?: string[];
+  baseNames?: string[];
+  price: number;
+  description: string;
+  schedule?: IScheduleItem[];
+  feeDescription?: string;
+  status: string;
+}
+```
+
+### 5.4 基地/机构数据 (bases.ts)
+
+```typescript
+interface IBase {
+  id: string;
+  name: string;
+  level: string;              // national | provincial | city
+  levelName: string;
+  district: string;
+  address: string;
+  imageUrl: string;
+  location: { latitude: number; longitude: number };
+  phone?: string;
+  description: string;
+  type: string;               // 研学基(营)地
+  isRecommended?: boolean;
+  status: string;
+}
+
+interface IAgency {
+  id: string;
+  name: string;
+  logo?: string;
+  logoText: string;
+  district: string;
+  address: string;
+  location: { latitude: number; longitude: number };
+  phone: string;
+  description: string;
+  type: string;               // 服务机构
+  status: string;
+}
+```
+
+### 5.5 导师数据 (experts.ts)
+
+```typescript
+interface IExpert {
+  id: string;
+  name: string;
+  avatarUrl: string;
+  role: string;               // teacher | officer | researcher | inheritor
+  roleName: string;
+  level: string;              // senior | intermediate
+  levelName: string;
+  certNo: string;
+  agencyId?: string;
+  agencyName?: string;
+  validUntil: string;
+  description: string;
+  status: string;
+}
+```
+
+## 6. app.json 配置
 
 ```json
 {
@@ -160,13 +514,18 @@ yongding-study/
     "pages/agency-detail/agency-detail",
     "pages/experts/experts",
     "pages/profile/profile",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/favorites/favorites",
+    "pages/expert-detail/expert-detail",
+    "pages/apply-mentor/apply-mentor",
+    "pages/join-selection/join-selection",
+    "pages/org-apply/org-apply"
   ],
-  "window": { "navigationBarBackgroundColor": "#C8102E", "navigationBarTitleText": "永定研学" },
   "tabBar": {
+    "color": "#999999",
     "selectedColor": "#C8102E",
     "list": [
-      { "pagePath": "pages/index/index", "text": "首页", "iconPath": "...", "selectedIconPath": "..." },
+      { "pagePath": "pages/index/index", "text": "首页" },
       { "pagePath": "pages/courses/courses", "text": "课程" },
       { "pagePath": "pages/routes/routes", "text": "线路" },
       { "pagePath": "pages/bases/bases", "text": "基地" },
@@ -176,433 +535,299 @@ yongding-study/
   "usingComponents": {
     "t-button": "tdesign-miniprogram/button/button",
     "t-tabs": "tdesign-miniprogram/tabs/tabs",
+    "t-tab-panel": "tdesign-miniprogram/tab-panel/tab-panel",
     "t-search": "tdesign-miniprogram/search/search",
     "t-image": "tdesign-miniprogram/image/image",
     "t-tag": "tdesign-miniprogram/tag/tag",
     "t-empty": "tdesign-miniprogram/empty/empty",
     "t-loading": "tdesign-miniprogram/loading/loading",
-    "t-swiper": "tdesign-miniprogram/swiper/swiper",
     "t-icon": "tdesign-miniprogram/icon/icon",
     "t-navbar": "tdesign-miniprogram/navbar/navbar"
-  },
-  "cloud": true
+  }
 }
 ```
 
-**globalData关键数据:**
+## 7. 全局数据 (app.ts)
 
-- theme: { primaryColor: '#C8102E', secondaryColor: '#FF6B00', infoColor: '#4A90E2', successColor: '#36C197' }
-- districts: ['凤城街道', '坎市镇', '下洋镇', '湖坑镇', '高陂镇', '抚市镇', '湖雷镇', '培丰镇']
-- courseCategories: latest/culture/red/science/intangible
-- routeCategories: culture/red/nature/labor/geology
-- expertRoles: teacher/officer/researcher/inheritor
-
-### 4.1 页面跳转规范
-
-| 跳转类型 | API | 使用场景 |
-|---------|-----|----------|
-| 详情页 | `wx.navigateTo` | 课程/线路/基地详情，携带id参数 |
-| 返回 | `wx.navigateBack` | 详情页返回列表 |
-| Tab切换 | `wx.switchTab` | 首页/课程/线路/基地/我的 |
-| 重定向 | `wx.redirectTo` | 登录后跳转 |
-
-**路由参数约定：**
-- 详情页必须携带 `id` 参数
-- onLoad 中通过 `options.id` 获取
-- 建议封装 `utils/navigator.ts` 工具类
-
-### 4.2 列表分页与筛选规范
-
-**分页参数：**
-- `page`: 当前页码，从1开始
-- `pageSize`: 每页条数，默认10
-- `hasMore`: 是否还有更多
-
-**筛选逻辑：**
-- 分类切换时重置 `page=1` 并清空列表
-- 触底加载检查 `hasMore` 状态
-- 下拉刷新时完全重置并调用 `wx.stopPullDownRefresh()`
-
-**分类配置：**
-- 课程: 最新/客家文化/红色教育/科学探究/非遗体验
-- 线路: 文化遗产/红色研学/自然生态/劳动实践/地质科普
-- 导师: 研学导师/研学教官/研究员/非遗传承
-
----
-
-## 5. 云函数开发
-
-### 5.1 目录结构
-
-```
-cloudfunctions/
-├── user/          # 用户相关
-├── course/        # 课程相关
-├── route/         # 线路相关
-├── base/          # 基地相关
-├── expert/        # 导师相关
-├── common/        # 通用功能
-└── _shared/       # 共享工具
+```typescript
+App<IAppOption>({
+  globalData: {
+    userInfo: null,
+    theme: {
+      primaryColor: '#C8102E',
+      secondaryColor: '#FF6B00',
+      infoColor: '#4A90E2',
+      successColor: '#36C197'
+    },
+    districts: ['凤城街道', '坎市镇', '下洋镇', '湖坑镇', '高陂镇', '抚市镇', '湖雷镇', '培丰镇'],
+    courseCategories: [
+      { key: 'latest', name: '最新' },
+      { key: 'culture', name: '客家文化' },
+      { key: 'red', name: '红色教育' },
+      { key: 'science', name: '科学探究' },
+      { key: 'intangible', name: '非遗体验' }
+    ],
+    routeCategories: [
+      { key: 'nature', name: '自然生态' },
+      { key: 'red', name: '红色研学' },
+      { key: 'culture', name: '文化遗产' },
+      { key: 'labor', name: '劳动实践' },
+      { key: 'geology', name: '地质科普' }
+    ],
+    expertRoles: [
+      { key: 'teacher', name: '研学导师' },
+      { key: 'officer', name: '研学教官' },
+      { key: 'researcher', name: '研究员' },
+      { key: 'inheritor', name: '非遗传承' }
+    ],
+    pageParams: null
+  }
+});
 ```
 
-### 5.2 响应格式规范
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| code | 0/400/404/500 | 0=成功, 400=参数错误, 404=不存在, 500=服务器错误 |
-| data | T | 返回数据 |
-| message | string | 错误信息 |
+## 8. 样式规范
 
-### 5.3 列表接口规范
+### 8.1 主题变量 (theme.wxss)
 
-**请求参数：**
-- `action`: 操作类型 (getList/getDetail/...)
-- `page`: 页码
-- `pageSize`: 每页条数
-- `category`: 分类筛选(可选)
-
-**返回数据：**
-- `list`: 数据数组
-- `total`: 总数
-- `hasMore`: 是否还有更多
-
-### 5.4 Service层封装规范
-
-- 每个实体对应一个Service文件 (`services/course.ts`)
-- 统一封装 `wx.cloud.callFunction` 调用
-- 返回类型安全的数据
-
----
-
-## 6. 数据库设计 (MongoDB)
-
-### 6.1 集合设计
-
-| 集合 | 关键字段 | 索引 |
-|------|---------|------|
-| users | openId, role(user/expert/admin), phone | - |
-| courses | title, category, baseId, price, tags[], status, schedule[] | category+status, baseId |
-| routes | title, category, agencyId, baseIds[], price, schedule[] | category+status, agencyId |
-| bases | name, level, district, address, location(GeoPoint) | district+level, location(2dsphere) |
-| agencies | name, logo, district, phone, address | - |
-| experts | name, role, level, certNo, agencyId, validUntil | role+level, certNo(unique) |
-
-### 6.2 类型定义规范
-
-**类型文件结构：**
-
-| 文件 | 内容 |
-|------|------|
-| `typings/models.d.ts` | 数据模型类型 (User, Course, Route, Base, Agency, Expert) |
-| `typings/api.d.ts` | API响应类型 (ApiResponse, ListResponse) |
-| `typings/tdesign.d.ts` | TDesign组件事件类型 |
-
-**核心类型定义：**
-
-| 类型 | 用途 |
-|------|------|
-| `PageOptions` | 页面onLoad参数 |
-| `GetListParams` | 列表请求参数 (page, pageSize, category) |
-| `ListResponse<T>` | 列表响应 (list, total, hasMore) |
-| `ApiResponse<T>` | API通用响应 (code, data, message) |
-| `ScheduleItem` | 行程安排项 (time, title, desc) |
-
-**枚举类型：**
-
-| 枚举 | 值 |
-|------|------|
-| UserRole | user / expert / admin |
-| BaseLevel | national / provincial / city |
-| ExpertLevel | junior / intermediate / senior |
-| CourseCategory | latest / culture / red / science / intangible |
-| RouteCategory | culture / red / nature / labor / geology |
-| ExpertRole | teacher / officer / researcher / inheritor |
-
----
-
-## 7. UI设计规范
-
-### 7.1 色彩体系
-
-**主色调:**
-
-- 客家红(主品牌色): `#C8102E` - 强调按钮/选中状态/品牌标识
-- 活力橙(辅助强调): `#FF6B00` - 线路详情/Tab选中指示器
-- 信息蓝(功能色): `#4A90E2` - 模块标题/时间轴节点
-- 导航绿(功能色): `#36C197` - 地图导航按钮
-
-**中性色:**
-
-- 背景白: `#FFFFFF` - 主背景
-- 浅灰背景: `#F5F7FA` - 详情页次级背景
-- 主文字: `gray-900` - 标题/重要内容
-- 次级文字: `gray-500` - 描述/辅助信息
-- 占位文字: `gray-400` - 输入框占位符
-- 边框色: `gray-200`/`gray-100` - 分割线/卡片边框
-
-**状态色:**
-
-- 价格红: `#FF4D4F` - 价格显示
-- 成功色: `#52C41A` - 成功状态(预留)
-- 警告色: `#FAAD14` - 警告提示(预留)
-
-### 7.2 字体规范
-
-**字体家族:**
-
-- 标题: `font-serif`(衬线) - 品牌名称/页面标题/卡片标题
-- 正文: `font-sans`(无衬线) - 正文/描述/按钮
-- 数字: `font-mono`(等宽) - 价格/编号/时间
-
-**字号层级:**
-
-- 品牌标题: 26-32px
-- 页面标题: 20-22px
-- 卡片标题: 16-18px
-- 正文内容: 13-14px
-- 辅助信息: 10-12px
-- 标签文字: 10px(大写+加宽字距)
-
-**字重:** 标题 `font-bold` | 正文 `font-medium`/`font-light` | 辅助 `font-light`
-
-### 7.3 布局规范
-
-**整体框架:**
-
-- 移动端优先, 最大宽度 `max-w-md`(≈448px)
-- 页面居中显示, 两侧带阴影边框
-- 安全区域适配(`pb-safe`底部安全距离)
-
-**头部导航:**
-
-- 粘性定位(`sticky top-0`)
-- 毛玻璃背景(`bg-white/95 backdrop-blur-sm`)
-- 高度: 状态栏占位40px + 导航区48px
-- 右侧胶囊按钮模拟微信小程序样式
-
-**底部导航栏:**
-
-- 固定定位(`fixed bottom-0`)
-- 5Tab等宽分布, 高度64px
-- 图标24px, 文字10px
-- 选中状态: 图标加粗+文字变黑
-
-**内容间距:**
-
-- 页面水平内边距: 16px(`px-4`)
-- 卡片内边距: 20px(`p-5`)
-- 模块间距: 24-32px
-- 列表项间距: 16-24px
-
-### 7.4 组件样式
-
-**按钮:**
-
-- 主按钮: 圆角全圆 `rounded-full` + 客家红背景 + 白色文字 + 阴影
-- 次按钮: 圆角全圆 + 白色/透明背景 + 描边
-- 图标按钮: 圆形 `rounded-full` + 边框
-- 悬停: 背景色加深或反转
-
-**卡片:**
-
-- 圆角: `rounded-sm`/`rounded-lg`
-- 阴影: `shadow-sm`/`shadow-md`
-- 分割线: 1px浅灰 `border-gray-100`
-
-**图片:**
-
-- 比例: 16:9(Banner/详情大图) | 4:3(营地卡片) | 3:4(导师头像) | 1:1(方形缩略图)
-- 滤镜: 轻微灰度 `grayscale-[20%]~[30%]` + 对比度增强 `contrast-125`
-- 悬停: 取消灰度 + 放大 `scale-105`/`scale-110`
-- 圆角: 小圆角或无圆角
-
-**标签:**
-
-- 信息标签: 灰色背景 `bg-gray-100` + 圆角小 + 10px字号
-- 分类标签: 描边样式 `border` + 圆角全圆
-- 等级标签: 白色/黑色背景 + 毛玻璃效果 + 大写字母
-
-**搜索框:**
-
-- 灰色背景 `bg-gray-50`/`bg-gray-100`
-- 圆角 `rounded-lg`
-- 左侧搜索图标 + 占位符浅灰色
-
-### 7.5 交互效果
-
-**过渡动画:**
-
-- 默认时长: 300ms(`duration-300`)
-- 图片缩放: 500-700ms(`duration-500`/`duration-700`)
-- 缓动: 默认ease
-
-**悬停反馈:**
-
-- 文字变色: 灰色→黑色/品牌红
-- 背景变化: 透明→浅灰(`hover:bg-gray-50`)
-- 按钮反转: 背景↔文字颜色互换
-- 图片: 取消灰度 + 轻微放大
-
-**选中状态:**
-
-- Tab指示器: 底部2px色条
-- 导航图标: 加粗(`strokeWidth:2`)
-- 分类标签: 加粗+下划线
-
-**列表滚动:**
-
-- 横向滚动: 隐藏滚动条(`no-scrollbar`)
-- 平滑滚动: 原生滚动体验
-
-### 7.6 特殊组件
-
-**时间轴:**
-
-- 左侧竖线: 1px浅色边框 `border-l`
-- 节点圆点: 12-14px圆形, 品牌色填充
-- 节点带白色环形边框和阴影
-
-**底部悬浮栏:**
-
-- 白色背景 + 顶部边框
-- 左侧价格信息, 右侧操作按钮
-- 安全区域底部适配
-
-**展开/收起:**
-
-- 文字截断: `line-clamp-6`
-- 展开按钮: 居中显示, 带向下箭头
-- 箭头旋转动画
-
-**个人中心:**
-
-- 大号问候语标题(32px衬线字体)
-- 圆形头像带边框
-- 推广卡片: 黑色背景 + 模糊光晕装饰
-
-### 设计风格总结
-
-整体设计遵循「现代极简 + 客家文化」的融合风格：
-
-- **极简留白**：大量使用白色背景和灰度层次，突出内容本身
-- **衬线点缀**：标题使用衬线字体，增添文化底蕴和品质感
-- **克制用色**：以黑白灰为主，客家红作为品牌强调色点缀
-- **微妙质感**：轻灰度滤镜、毛玻璃效果、柔和阴影，营造高级感
-- **流畅交互**：悬停动效、平滑过渡，提供舒适的操作反馈
-
-## 8. TDesign组件库
-
-### 8.1 组件与功能映射
-
-| 功能需求   | TDesign组件         | 使用场景                   |
-| ---------- | ------------------- | -------------------------- |
-| 搜索框     | t-search            | 首页/列表页顶部搜索        |
-| Tab切换    | t-tabs              | 课程详情/线路详情/基地列表 |
-| 标签       | t-tag               | 分类标签/学段标签/等级标签 |
-| 底部操作栏 | 自定义              | 详情页底部(分享/收藏/报名) |
-| 空状态     | t-empty             | 列表为空/搜索无结果        |
-| 图片       | t-image             | 懒加载+占位图+错误处理     |
-| 加载       | t-loading           | 页面加载/列表加载更多      |
-| 轮播图     | t-swiper            | 首页Banner                 |
-| 导航栏     | t-navbar            | 自定义导航(详情页返回)     |
-| 图标       | t-icon              | 通用图标                   |
-| 时间轴     | t-steps(竖向)       | 行程安排展示               |
-| 下拉刷新   | t-pull-down-refresh | 列表页下拉刷新             |
-
-### 8.2 主题覆盖(tdesign.wxss)
-
-```
+```css
 page {
   /* 品牌色 */
   --td-brand-color: #C8102E;
   --td-brand-color-light: #FFF0F0;
+  --td-brand-color-focus: #E8354D;
+  --td-brand-color-active: #A00D25;
+  
   /* 功能色 */
   --td-error-color: #FF4D4F;
   --td-success-color: #36C197;
   --td-warning-color: #FAAD14;
+  --td-info-color: #4A90E2;
+  
   /* 背景色 */
   --td-bg-color-page: #F5F7FA;
   --td-bg-color-container: #FFFFFF;
+  
   /* 文字色 */
   --td-text-color-primary: #1a1a1a;
   --td-text-color-secondary: #666666;
   --td-text-color-placeholder: #999999;
+  --td-text-color-brand: #C8102E;
+  
   /* 边框色 */
   --td-border-color: #e5e5e5;
 }
 ```
 
-### 8.3 常用组件示例
+### 8.2 通用样式类 (common.wxss)
 
+**Flex布局:**
+- `.flex` `.flex-col` `.flex-row` `.flex-wrap`
+- `.items-center` `.items-start` `.items-end`
+- `.justify-center` `.justify-between` `.justify-around`
+
+**间距:**
+- `.p-2` ~ `.p-6` (padding)
+- `.px-2` ~ `.px-6` (padding-x)
+- `.py-2` ~ `.py-6` (padding-y)
+- `.mt-1` ~ `.mt-6` (margin-top)
+- `.mb-1` ~ `.mb-6` (margin-bottom)
+
+**文字:**
+- `.text-xs` ~ `.text-3xl` (字号)
+- `.font-light` `.font-normal` `.font-medium` `.font-bold`
+- `.text-center` `.text-left` `.text-right`
+- `.truncate` `.line-clamp-2` `.line-clamp-6`
+
+**颜色:**
+- `.text-gray-400` ~ `.text-gray-900`
+- `.bg-white` `.bg-gray-50` `.bg-gray-100`
+
+**边框:**
+- `.border` `.border-t` `.border-b`
+- `.rounded-sm` `.rounded` `.rounded-lg` `.rounded-full`
+
+**阴影:**
+- `.shadow-sm` `.shadow-md` `.shadow-lg`
+
+**定位:**
+- `.relative` `.absolute` `.fixed` `.sticky`
+- `.z-10` ~ `.z-50`
+
+### 8.3 首页样式示例
+
+```css
+/* 顶部固定区域 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+/* 品牌标题 */
+.app-title {
+  font-size: 52rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  font-family: 'Times New Roman', serif;
+}
+
+/* Banner轮播 */
+.banner-swiper {
+  width: 100%;
+  height: 800rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.banner-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 48rpx;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+/* 区块标题 */
+.section-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  font-family: 'Times New Roman', serif;
+}
+
+/* 查看更多 */
+.section-more {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+}
 ```
-<!-- 搜索框 -->
-<t-search placeholder="搜索课程、线路、基地..." bind:submit="onSearch" />
 
-<!-- Tab切换 -->
-<t-tabs value="{{activeTab}}" bind:change="onTabChange">
-  <t-tab-panel label="课程详情" value="detail" />
-  <t-tab-panel label="课程安排" value="schedule" />
-  <t-tab-panel label="费用明细" value="fees" />
-</t-tabs>
+## 9. 页面跳转规范
 
-<!-- 图片(懒加载+占位) -->
-<t-image src="{{url}}" mode="aspectFill" lazy loading="lazy" />
+```typescript
+// 跳转详情页
+wx.navigateTo({ url: `/pages/course-detail/course-detail?id=${id}` });
 
-<!-- 空状态 -->
-<t-empty icon="search" description="暂无搜索结果" />
+// 详情页接收参数
+onLoad(options: any) {
+  const { id } = options;
+  this.loadDetail(id);
+}
+
+// 返回上一页
+wx.navigateBack();
+
+// 跳转TabBar页
+wx.switchTab({ url: '/pages/index/index' });
+
+// 跳转TabBar页并传参 (通过globalData)
+const app = getApp() as any;
+app.globalData.pageParams = { tab: 'agencies' };
+wx.switchTab({ url: '/pages/bases/bases' });
+
+// TabBar页接收参数
+onShow() {
+  const app = getApp();
+  if (app.globalData?.pageParams) {
+    const params = app.globalData.pageParams;
+    // 处理参数
+    app.globalData.pageParams = null; // 清除
+  }
+}
 ```
 
-## 9. 版本控制
+## 10. 列表分页规范
 
-**分支:** main(生产) | develop(开发) | feature/xxx | fix/xxx | release/vX.X.X
+```typescript
+Page({
+  data: {
+    list: [],
+    loading: false,
+    hasMore: true,
+    page: 1,
+    pageSize: 10,
+    currentCategory: 'all'
+  },
 
-**提交格式:** `[type](scope): message`
+  // 加载数据
+  loadData(isRefresh = true) {
+    if (this.data.loading) return;
+    this.setData({ loading: true });
 
-- feat: 新功能 | fix: 修复 | docs: 文档 | style: 样式 | refactor: 重构 | perf: 性能
+    setTimeout(() => {
+      let filtered = [...allData];
+      
+      // 分类筛选
+      if (this.data.currentCategory !== 'all') {
+        filtered = filtered.filter(item => item.category === this.data.currentCategory);
+      }
 
-## 10. setData性能优化
+      // 分页
+      const start = isRefresh ? 0 : (this.data.page - 1) * this.data.pageSize;
+      const end = start + this.data.pageSize;
+      const pageData = filtered.slice(start, end);
 
-**核心原则:**
+      this.setData({
+        list: isRefresh ? pageData : [...this.data.list, ...pageData],
+        loading: false,
+        hasMore: end < filtered.length,
+        page: isRefresh ? 2 : this.data.page + 1
+      });
+    }, 300);
+  },
 
-1. **data只存渲染数据** - 非渲染数据用 `this.xxx`
-2. **控制频率** - 合并调用，避免onPageScroll中频繁调用
-3. **组件化高频更新** - 倒计时等封装为独立组件
-4. **路径更新** - 使用路径语法 `'array[2].msg'` 更新嵌套数据
-5. **后台暂停** - onHide时清除定时器，onShow恢复
+  // 切换分类
+  onCategoryChange(e: any) {
+    const { id } = e.currentTarget.dataset;
+    if (id === this.data.currentCategory) return;
+    this.setData({ currentCategory: id, page: 1, hasMore: true });
+    this.loadData(true);
+  },
 
-**避免的做法:**
-- 直接 `this.setData(this.data)` 全量更新
-- 在onPageScroll中频繁调用setData
-- 将非渲染数据存入data
+  // 下拉刷新
+  onPullDownRefresh() {
+    this.setData({ page: 1, hasMore: true });
+    this.loadData(true);
+    wx.stopPullDownRefresh();
+  },
 
----
+  // 触底加载
+  onReachBottom() {
+    if (this.data.hasMore && !this.data.loading) {
+      this.loadData(false);
+    }
+  }
+});
+```
 
-## 11. App入口规范
+## 11. 功能状态说明
 
-**globalData 必须包含:**
-- `userInfo`: 用户信息
-- `theme`: 主题色配置
-- `districts`: 乡镇列表
+### 已实现功能:
+- ✅ 首页展示 (Banner/功能入口/乡镇标签/热门内容)
+- ✅ 课程列表与详情
+- ✅ 线路列表与详情
+- ✅ 基地/机构列表与详情
+- ✅ 导师列表与详情
+- ✅ 搜索功能 (课程/线路/基地)
+- ✅ 收藏功能 (本地存储)
+- ✅ 个人中心基础功能
 
-**生命周期职责:**
-- `onLaunch`: 初始化云开发环境
-- `onShow`: 小程序切前台处理
-- `onHide`: 小程序切后台处理
-
----
-
-## 12. TDesign 组件事件规范
-
-### 12.1 常用事件类型
-
-| 组件 | 事件 | 参数类型 |
-|------|------|----------|
-| t-search | bind:submit | `{ value: string }` |
-| t-tabs | bind:change | `{ value: string, label: string }` |
-| t-image | bind:error | `CustomEvent` |
-| t-swiper | bind:change | `{ current: number, source: string }` |
-
-### 12.2 类型扩展
-
-- 在 `typings/tdesign.d.ts` 中声明TDesign组件事件类型
-- 使用 `WechatMiniprogram.CustomEvent<T>` 包装事件参数类型
+### 待开发功能 (显示"功能开发中"):
+- ⏳ 资讯模块
+- ⏳ 精品线路
+- ⏳ 公示模块
+- ⏳ 服务模块
+- ⏳ 乡镇街道筛选
+- ⏳ 投诉建议
+- ⏳ 实践活动
+- ⏳ 活动报名
+- ⏳ 报名支付功能

@@ -1,0 +1,97 @@
+/* components/timeline/timeline.wxss */
+.timeline {
+  position: relative;
+  padding-left: 48rpx;
+  border-left: 1rpx solid #E5E7EB;
+  margin-left: 16rpx;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 64rpx;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-line {
+  position: absolute;
+  left: -48rpx;
+  top: 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8rpx #FFFFFF;
+  position: relative;
+  left: -1rpx;
+}
+
+.timeline-dot--red {
+  background: #C8102E;
+}
+
+.timeline-dot--blue {
+  background: #4A90E2;
+}
+
+.timeline-connector {
+  width: 1rpx;
+  flex: 1;
+  min-height: 80rpx;
+  background: #E5E7EB;
+  margin-top: 8rpx;
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 16rpx;
+}
+
+.timeline-time {
+  font-size: 28rpx;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Monaco', monospace;
+  margin-bottom: 8rpx;
+}
+
+.timeline-time--red {
+  color: #C8102E;
+}
+
+.timeline-time--blue {
+  color: #4A90E2;
+}
+
+.timeline-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 16rpx;
+}
+
+.timeline-desc {
+  font-size: 26rpx;
+  color: #6B7280;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.timeline-empty {
+  padding: 80rpx 0;
+  text-align: center;
+  color: #9CA3AF;
+  font-size: 28rpx;
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}

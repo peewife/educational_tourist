@@ -1,0 +1,22 @@
+<!--components/expert-card/expert-card.wxml-->
+<!-- 列表布局（导师列表页） -->
+<view wx:if="{{mode === 'list'}}" class="expert-card expert-card--list" bindtap="handleTap">
+  <view class="card-avatar">
+    <image src="{{expert.avatarUrl}}" mode="aspectFill" lazy-load></image>
+  </view>
+  <view class="card-content">
+    <text class="card-name font-serif">{{expert.name}}</text>
+    <text class="card-role">{{expert.roleName}}</text>
+  </view>
+  <view class="card-level">
+    <text class="level-tag">{{expert.levelName}}</text>
+  </view>
+</view>
+
+<!-- 网格布局（机构详情关联导师） -->
+<view wx:else class="expert-card expert-card--grid" bindtap="handleTap">
+  <view class="card-avatar card-avatar--large">
+    <image src="{{expert.avatarUrl}}" mode="aspectFill" lazy-load></image>
+  </view>
+  <text class="card-name card-name--center">{{expert.name}}</text>
+</view>

@@ -1,0 +1,123 @@
+<!--pages/index/index.wxml-->
+<view class="page-container">
+  <!-- 顶部固定区域：标题 + 搜索栏 -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-content">
+      <!-- 标题栏 -->
+      <view class="title-bar">
+        <text class="app-title">永定研学</text>
+      </view>
+      <!-- 搜索栏 -->
+      <view class="search-bar" bindtap="onSearchFocus">
+        <t-icon name="search" size="36rpx" color="#999" />
+        <text class="search-placeholder">搜索课程、线路、基地...</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 主内容区域 -->
+  <view class="main-content" style="padding-top: {{statusBarHeight + 120}}px;">
+    
+    <!-- Banner 轮播图 -->
+    <view class="banner-section">
+      <swiper 
+        class="banner-swiper"
+        indicator-dots="{{false}}"
+        autoplay="{{true}}"
+        interval="{{4000}}"
+        duration="{{500}}"
+        circular="{{true}}"
+        bindchange="onBannerChange"
+      >
+        <swiper-item 
+          wx:for="{{banners}}" 
+          wx:key="id"
+          bindtap="onBannerTap"
+          data-index="{{index}}"
+        >
+          <view class="banner-item">
+            <image class="banner-image" src="{{item.imageUrl}}" mode="aspectFill" />
+            <view class="banner-overlay">
+              <text class="banner-subtitle">{{item.subtitle}}</text>
+              <text class="banner-title">{{item.title}}</text>
+              <view class="banner-btn">开始探索</view>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+      <!-- 自定义指示器 -->
+      <view class="banner-indicators">
+        <view 
+          wx:for="{{banners}}" 
+          wx:key="id"
+          class="indicator-dot {{currentBannerIndex === index ? 'active' : ''}}"
+        />
+      </view>
+    </view>
+
+    <!-- 功能入口网格 -->
+    <view class="section">
+      <function-grid items="{{functionEntries}}" />
+    </view>
+
+    <!-- 乡镇街道标签 -->
+    <view class="section section-border-top">
+      <district-tags 
+        districts="{{districts}}"
+        selected="{{selectedDistrict}}"
+        bind:select="onDistrictChange"
+      />
+    </view>
+
+    <!-- 热门课程 -->
+    <view class="section">
+      <view class="section-header section-header-underline">
+        <text class="section-title">热门课程</text>
+        <text class="section-more" bindtap="onViewMoreCourses">查看更多</text>
+      </view>
+      <view class="course-list">
+        <course-card 
+          wx:for="{{hotCourses}}" 
+          wx:key="id"
+          course="{{item}}"
+          mode="horizontal"
+        />
+      </view>
+    </view>
+
+    <!-- 热门线路 -->
+    <view class="section section-border-top">
+      <view class="section-header section-header-underline">
+        <text class="section-title">热门线路</text>
+        <text class="section-more" bindtap="onViewMoreRoutes">查看更多</text>
+      </view>
+      <view class="route-list">
+        <route-card 
+          wx:for="{{hotRoutes}}" 
+          wx:key="id"
+          route="{{item}}"
+          mode="horizontal"
+        />
+      </view>
+    </view>
+
+    <!-- 研学营地 -->
+    <view class="section section-border-top">
+      <view class="section-header">
+        <text class="section-title">研学营地</text>
+        <text class="section-more" bindtap="onViewMoreBases">查看更多</text>
+      </view>
+      <scroll-view class="base-scroll" scroll-x enable-flex>
+        <base-card 
+          wx:for="{{hotBases}}" 
+          wx:key="id"
+          base="{{item}}"
+          mode="scroll"
+        />
+      </scroll-view>
+    </view>
+
+    <!-- 底部安全区域 -->
+    <view class="safe-bottom" />
+  </view>
+</view>

@@ -1,0 +1,207 @@
+/* pages/routes/routes.wxss */
+@import '/styles/theme.wxss';
+@import '/styles/common.wxss';
+
+.page-container {
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+/* 顶部固定区域 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.header-content {
+  padding: 0 32rpx 20rpx;
+}
+
+/* 标题栏 */
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+}
+
+.app-title {
+  font-size: 52rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: -1rpx;
+}
+
+/* 分类筛选栏 */
+.filter-bar {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1rpx solid #f0f0f0;
+  /* padding-top will be set dynamically via style in wxml */
+}
+
+.filter-scroll {
+  display: flex;
+  white-space: nowrap;
+  padding: 24rpx 32rpx;
+}
+
+.filter-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-item {
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 48rpx;
+  padding-bottom: 16rpx;
+}
+
+.filter-text {
+  font-size: 28rpx;
+  color: #999;
+  transition: all 0.3s;
+}
+
+.filter-item.active .filter-text {
+  color: var(--td-brand-color);
+  font-weight: bold;
+}
+
+.filter-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64rpx;
+  height: 4rpx;
+  background: var(--td-brand-color);
+  border-radius: 2rpx;
+}
+
+/* 线路列表 */
+.route-list {
+  padding: 32rpx;
+}
+
+.route-item {
+  display: flex;
+  margin-bottom: 32rpx;
+}
+
+/* 序号与连接线 */
+.route-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 24rpx;
+  padding-top: 8rpx;
+}
+
+.number-text {
+  font-size: 20rpx;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.number-line {
+  width: 2rpx;
+  flex: 1;
+  min-height: 160rpx;
+  background: #f0f0f0;
+  margin-top: 8rpx;
+}
+
+/* 内容区域 */
+.route-content {
+  flex: 1;
+  padding-bottom: 32rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.route-main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.route-info {
+  flex: 1;
+  padding-right: 24rpx;
+}
+
+.route-category {
+  font-size: 20rpx;
+  color: var(--td-brand-color);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 4rpx;
+  margin-bottom: 8rpx;
+  display: block;
+}
+
+.route-title {
+  font-size: 34rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  line-height: 1.4;
+  font-family: 'Times New Roman', serif;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.route-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.tag-item {
+  font-size: 20rpx;
+  color: #999;
+  border: 1rpx solid #e5e5e5;
+  padding: 6rpx 16rpx;
+  border-radius: 100rpx;
+}
+
+/* 封面图 */
+.route-cover {
+  width: 160rpx;
+  height: 160rpx;
+  flex-shrink: 0;
+  background: #f5f5f5;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 加载状态 */
+.loading-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 48rpx 0;
+}
+
+.no-more {
+  text-align: center;
+  padding: 32rpx 0;
+  color: #ccc;
+  font-size: 24rpx;
+}
+
+.safe-bottom {
+  height: 180rpx;
+}

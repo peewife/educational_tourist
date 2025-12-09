@@ -1,0 +1,124 @@
+/* components/bottom-action-bar/bottom-action-bar.wxss */
+.action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 32rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background: #FFFFFF;
+  border-top: 1rpx solid #f0f0f0;
+  z-index: 100;
+}
+
+.action-bar__left {
+  display: flex;
+  align-items: center;
+}
+
+.action-bar__price {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-label {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.price-value {
+  display: flex;
+  align-items: baseline;
+  color: #FF4D4F;
+  font-weight: 700;
+}
+
+.price-symbol {
+  font-size: 24rpx;
+}
+
+.price-number {
+  font-size: 40rpx;
+  font-family: 'SF Mono', 'Monaco', monospace;
+}
+
+.price-unit {
+  font-size: 24rpx;
+  margin-left: 4rpx;
+}
+
+.action-bar__icons {
+  display: flex;
+  align-items: center;
+  gap: 40rpx;
+  padding: 0 16rpx;
+}
+
+.icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #999;
+}
+
+.icon-share {
+  width: 40rpx;
+  height: 40rpx;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'/%3E%3Cpolyline points='16 6 12 2 8 6'/%3E%3Cline x1='12' y1='2' x2='12' y2='15'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+.icon-heart {
+  width: 40rpx;
+  height: 40rpx;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+.icon-heart--active {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23C8102E' stroke='%23C8102E' stroke-width='2'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
+}
+
+.icon-text {
+  font-size: 20rpx;
+  margin-top: 4rpx;
+}
+
+.action-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.action-bar__btn {
+  padding: 20rpx 48rpx;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.action-bar__btn--primary {
+  background: #C8102E;
+  color: #FFFFFF;
+  box-shadow: 0 8rpx 24rpx rgba(200, 16, 46, 0.3);
+}
+
+.action-bar__btn--orange {
+  background: #FF6B00;
+  box-shadow: 0 8rpx 24rpx rgba(255, 107, 0, 0.3);
+}
+
+.action-bar__btn--secondary {
+  background: #FFFFFF;
+  color: #666;
+  border: 1rpx solid #e5e5e5;
+}
+
+.action-bar__safe {
+  height: calc(120rpx + env(safe-area-inset-bottom));
+}

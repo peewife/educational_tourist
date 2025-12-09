@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "精品线路",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "route-card": "/components/route-card/route-card",
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

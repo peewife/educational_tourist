@@ -1,0 +1,64 @@
+<!--pages/join-selection/join-selection.wxml-->
+<view class="page-container">
+  <!-- 顶部固定区域：标题 -->
+  <view class="header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-content">
+      <view class="back-button" bindtap="onBackTap">
+        <t-icon name="chevron-left" size="52rpx" color="#1a1a1a" />
+      </view>
+      <!-- 标题栏 -->
+      <view class="title-bar">
+        <text class="app-title">加入我们</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 占位高度 -->
+  <view style="height: calc({{statusBarHeight}}px + 108rpx);"></view>
+
+  <view class="content">
+    <text class="page-title font-serif">选择类型</text>
+    <text class="page-desc">请选择您的机构类型以继续申请</text>
+
+    <view class="type-list">
+      <!-- 研学基(营)地 -->
+      <view class="type-card" bindtap="onTypeSelect" data-type="base">
+        <view class="type-info">
+          <text class="type-name font-serif">研学基(营)地</text>
+          <text class="type-name-en">Study Base</text>
+          <text class="type-desc">拥有实体基地场所，具备研学接待资质</text>
+        </view>
+        <t-icon class="type-icon" name="building-2" size="56rpx" />
+        <view class="type-corner"></view>
+      </view>
+
+      <!-- 服务机构 -->
+      <view class="type-card" bindtap="onTypeSelect" data-type="agency">
+        <view class="type-info">
+          <text class="type-name font-serif">服务机构</text>
+          <text class="type-name-en">Service Agency</text>
+          <text class="type-desc">提供研学旅行服务的专业机构</text>
+        </view>
+        <t-icon class="type-icon" name="app" size="56rpx" />
+        <view class="type-corner"></view>
+      </view>
+
+      <!-- 正规学校 -->
+      <view class="type-card" bindtap="onTypeSelect" data-type="school">
+        <view class="type-info">
+          <text class="type-name font-serif">正规学校</text>
+          <text class="type-name-en">School</text>
+          <text class="type-desc">正规学校在线申请入驻</text>
+        </view>
+        <t-icon class="type-icon" name="education" size="56rpx" />
+        <view class="type-corner"></view>
+      </view>
+    </view>
+
+    <!-- 提示信息 -->
+    <view class="tip-box">
+      <t-icon name="chat" size="32rpx" color="#C8102E" />
+      <text class="tip-text">请谨慎选择，申请提交后机构类型将无法更改。</text>
+    </view>
+  </view>
+</view>

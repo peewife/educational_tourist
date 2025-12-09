@@ -1,0 +1,179 @@
+/* pages/expert-detail/expert-detail.wxss */
+@import '/styles/theme.wxss';
+@import '/styles/common.wxss';
+
+.page-container {
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* 顶部固定区域 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx 20rpx;
+  height: 88rpx;
+}
+
+/* 标题栏 */
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+}
+
+.app-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: -1rpx;
+}
+
+.back-button {
+  position: relative;
+  z-index: 1;
+  padding: 16rpx;
+  margin-left: -16rpx;
+}
+
+.nav-placeholder {
+  width: 100%;
+}
+
+.content {
+  padding: 64rpx 48rpx;
+}
+
+/* 顶部照片区域 */
+.photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80rpx;
+}
+
+.photo-frame {
+  position: relative;
+  margin-bottom: 48rpx;
+}
+
+.photo-bg {
+  width: 288rpx;
+  height: 384rpx;
+  background: #C8102E;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.15);
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: luminosity;
+  opacity: 0.9;
+}
+
+.photo-border {
+  position: absolute;
+  top: -24rpx;
+  right: -24rpx;
+  width: 288rpx;
+  height: 384rpx;
+  border: 2rpx solid #1a1a1a;
+  z-index: 0;
+}
+
+.expert-name {
+  font-size: 60rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8rpx;
+}
+
+.expert-role {
+  font-size: 28rpx;
+  color: #6B7280;
+  letter-spacing: 4rpx;
+  text-transform: uppercase;
+  padding-bottom: 8rpx;
+  border-bottom: 2rpx solid #E5E7EB;
+}
+
+/* 详细信息列表 */
+.info-section {
+  margin-bottom: 64rpx;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24rpx 0;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #9CA3AF;
+  font-style: italic;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+/* 简介 */
+.desc-section {
+  margin-bottom: 64rpx;
+}
+
+.section-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 32rpx;
+  display: block;
+}
+
+.desc-text {
+  font-size: 28rpx;
+  color: #6B7280;
+  line-height: 1.8;
+}
+
+/* 证书展示区 */
+.cert-section {
+  margin-bottom: 64rpx;
+}
+
+.cert-image-wrap {
+  border: 2rpx solid #F3F4F6;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.cert-image {
+  width: 100%;
+  display: block;
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}

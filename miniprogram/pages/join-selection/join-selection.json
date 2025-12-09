@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "加入我们",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "t-icon": "tdesign-miniprogram/icon/icon"
+  }
+}

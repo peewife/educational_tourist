@@ -1,0 +1,53 @@
+<!--components/route-card/route-card.wxml-->
+<!-- 横向布局（首页热门线路） -->
+<view wx:if="{{mode === 'horizontal'}}" class="route-card route-card--horizontal" bindtap="handleTap">
+  <view class="card-image card-image--square">
+    <image src="{{route.imageUrl}}" mode="aspectFill" lazy-load></image>
+  </view>
+  <view class="card-content">
+    <view class="card-header">
+      <text class="card-category">{{route.categoryName}}</text>
+      <text class="card-title font-serif">{{route.title}}</text>
+    </view>
+    <view class="card-tags">
+      <text wx:for="{{route.gradeLevel}}" wx:key="*this" class="card-tag">{{item}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 时间轴布局（线路列表页） -->
+<view wx:elif="{{mode === 'timeline'}}" class="route-card route-card--timeline" bindtap="handleTap">
+  <view class="timeline-left">
+    <text class="timeline-number">{{index < 10 ? '0' + index : index}}</text>
+    <view class="timeline-line" wx:if="{{!isLast}}"></view>
+  </view>
+  <view class="timeline-content">
+    <view class="card-main">
+      <view class="card-info">
+        <text class="card-category card-category--red">{{route.categoryName}}</text>
+        <text class="card-title font-serif">{{route.title}}</text>
+      </view>
+      <view class="card-image card-image--thumb">
+        <image src="{{route.imageUrl}}" mode="aspectFill" lazy-load></image>
+      </view>
+    </view>
+    <view class="card-tags">
+      <text wx:for="{{route.gradeLevel}}" wx:key="*this" class="card-tag card-tag--outline">{{item}}</text>
+      <text class="card-tag card-tag--outline">{{route.duration}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 小卡片布局（机构详情关联线路） -->
+<view wx:else class="route-card route-card--small" bindtap="handleTap">
+  <view class="card-content">
+    <text class="card-title card-title--small">{{route.title}}</text>
+    <view class="card-tags">
+      <text wx:for="{{route.gradeLevel}}" wx:key="*this" class="card-tag card-tag--small">{{item}}</text>
+      <text wx:if="{{route.duration}}" class="card-tag card-tag--small">{{route.duration}}</text>
+    </view>
+  </view>
+  <view class="card-image card-image--rect">
+    <image src="{{route.imageUrl}}" mode="aspectFill" lazy-load></image>
+  </view>
+</view>

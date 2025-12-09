@@ -1,0 +1,35 @@
+/* 全局样式 */
+@import './styles/theme.wxss';
+@import './styles/common.wxss';
+
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 28rpx;
+  color: #1a1a1a;
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+/* 安全区域底部内边距 */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}
+
+/* 等宽字体 */
+.font-mono {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+}

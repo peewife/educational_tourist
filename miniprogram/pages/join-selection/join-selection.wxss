@@ -1,0 +1,178 @@
+/* pages/join-selection/join-selection.wxss */
+@import '/styles/theme.wxss';
+@import '/styles/common.wxss';
+
+.page-container {
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* 顶部固定区域 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  padding: 0 32rpx 20rpx;
+  height: 88rpx;
+}
+
+/* 标题栏 */
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+}
+
+.app-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #1a1a1a;
+  font-family: 'Times New Roman', serif;
+  letter-spacing: -1rpx;
+}
+
+.back-button {
+  position: relative;
+  z-index: 1;
+  padding: 16rpx;
+  margin-left: -16rpx;
+}
+
+.nav-placeholder {
+  width: 100%;
+}
+
+.content {
+  padding: 80rpx 48rpx;
+}
+
+.page-title {
+  font-size: 60rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.page-desc {
+  font-size: 28rpx;
+  color: #9CA3AF;
+  font-weight: 300;
+  display: block;
+  margin-bottom: 80rpx;
+}
+
+/* 类型卡片列表 */
+.type-list {
+  margin-bottom: 96rpx;
+}
+
+.type-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 48rpx;
+  border: 2rpx solid #F3F4F6;
+  margin-bottom: 48rpx;
+  position: relative;
+  background: #fff;
+  transition: all 0.3s;
+}
+
+.type-card:active {
+  border-color: #C8102E;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.05);
+}
+
+.type-card:active .type-name {
+  color: #C8102E;
+}
+
+.type-card:active .type-corner {
+  opacity: 1;
+}
+
+/* Icon Color Change */
+.type-icon {
+  color: #D1D5DB !important; /* Force default color if component sets one */
+  transition: color 0.3s;
+}
+
+.type-card:active .type-icon {
+  color: #C8102E !important;
+}
+
+.type-info {
+  flex: 1;
+}
+
+.type-name {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  display: block;
+  transition: color 0.3s;
+}
+
+.type-name-en {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #D1D5DB;
+  text-transform: uppercase;
+  letter-spacing: 2rpx;
+  display: block;
+  margin-bottom: 16rpx;
+}
+
+.type-desc {
+  font-size: 24rpx;
+  color: #6B7280;
+  font-weight: 300;
+}
+
+.type-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 20rpx solid transparent;
+  border-right: 20rpx solid #C8102E;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* 提示信息 */
+.tip-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 24rpx;
+  padding: 32rpx;
+  background: #F9FAFB;
+  border-left: 4rpx solid #C8102E;
+}
+
+.tip-text {
+  font-size: 24rpx;
+  color: #6B7280;
+  font-weight: 300;
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* 衬线字体 */
+.font-serif {
+  font-family: 'Times New Roman', 'Songti SC', serif;
+}
